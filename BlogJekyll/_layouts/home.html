@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<div>
+    {% assign postCount = site.posts|size %}
+    {% if postCount > 0  %}
+        {% for post in site.posts  %}
+            <article>
+                <header class="article-header">
+                    <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+                </header>
+                {% assign date_format = siteminima.date_format | default: "%b %-d, %Y" %}
+                <span>{{ post.date | date: date_format }}</span>
+                <div class="article-content">
+                    {{ post.content}}
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+</div>

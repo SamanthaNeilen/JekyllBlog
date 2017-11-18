@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BlogJekyll", "BlogJekyll\", "{0565E3E7-731D-4D9C-B5B9-C98A5A4D0D29}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50166"
+		Debug.AspNetCompiler.PhysicalPath = "BlogJekyll\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50166\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50166"
+		Release.AspNetCompiler.PhysicalPath = "BlogJekyll\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50166\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50166"
+		SlnRelativePath = "BlogJekyll\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0565E3E7-731D-4D9C-B5B9-C98A5A4D0D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0565E3E7-731D-4D9C-B5B9-C98A5A4D0D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1458BE20-F2E3-4CFE-B4E8-2AEECD980042}
+	EndGlobalSection
+EndGlobal

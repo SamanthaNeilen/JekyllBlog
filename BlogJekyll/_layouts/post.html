@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<article>
+    <header class="article-header">
+        {{ page.title | escape }}
+    </header>
+    {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+    <span>{{ page.date | date: date_format }}</span>
+    <div class="article-content">
+        {{ content }}
+    </div>
+    {% if site.disqus.shortname %}
+    {% include disqus_comments.html %}
+    {% endif %}
+</article>
