@@ -11,3 +11,11 @@
     <a href="https://www.linkedin.com/in/samantha-neilen-16153713"><i class="fa fa-linkedin" aria-hidden="true"></i><span>&nbsp;{{site.title}}</span></a> <br />
     Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a>
 </section>
+<section class="sidebar-section">
+    <h3>Last posts </h3>    
+    {% for post in site.posts limit:5 %}
+        <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a> <br/>
+        <div class="last-posts-spacer"></div>
+    {% endfor %}
+    <a href="{{ "/archive" | relative_url }}">Archive</a>
+</section>

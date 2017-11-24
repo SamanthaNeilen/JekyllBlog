@@ -46,3 +46,7 @@ a, a:visited {
 .article-content {
     margin-top: 12px;
 }
+
+.last-posts-spacer {
+    height:3px;
+}

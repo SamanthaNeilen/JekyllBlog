@@ -2,6 +2,7 @@
 layout: post
 title:  "Starting my blog"
 date:   2017-11-18 08:46:41 +0100
+tags: Blog Jekyll
 ---
 <p>
 	I would like to start my blog with a post of how I set up this blog. 
