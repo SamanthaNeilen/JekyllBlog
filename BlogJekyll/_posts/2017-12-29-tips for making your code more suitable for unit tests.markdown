@@ -1,7 +1,7 @@
 ﻿---
 layout: post
 title:  "Tips for making your code more suitable for unit testing"
-date:   2017-11-29 00:00:00 +0100
+date:   2017-12-29 00:00:00 +0100
 tags: TestAutomation
 ---
 <p>
