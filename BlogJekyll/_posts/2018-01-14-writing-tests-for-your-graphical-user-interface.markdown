@@ -381,8 +381,8 @@ namespace CodedUITestTestApplication.Tests
 
 <h3>Resources</h3>
 <p>
-<a href="https://app.pluralsight.com/library/courses/selenium/table-of-contents" target="_blank">Pluralsight- Coded UI</a><br/>
-<a href="https://app.pluralsight.com/library/courses/codedui-test-automation/table-of-contents" target="_blank">Pluralsight- Selenium</a><br/>
+<a href="https://app.pluralsight.com/library/courses/codedui-test-automation/table-of-contents" target="_blank">Pluralsight- Coded UI</a><br/>
+<a href="https://app.pluralsight.com/library/courses/selenium/table-of-contents" target="_blank">Pluralsight- Selenium</a><br/>
 <a href="https://docs.microsoft.com/nl-nl/visualstudio/test/use-ui-automation-to-test-your-code" target="_blank">Microsoft docs - Use UI Automation To Test Your Code</a><br/>
 <a href="http://www.seleniumhq.org/" target="_blank">Selenium HQ</a><br/>
 </p>
