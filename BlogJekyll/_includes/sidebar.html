@@ -8,13 +8,14 @@
     <h3>Social</h3>
     <a href="https://github.com/{{ site.github_username }}"><i class="fa fa-github" aria-hidden="true"></i><span>&nbsp;{{ site.github_username }}</span></a> <br />
     <a href="https://twitter.com/{{ site.twitter_username }}"><i class="fa fa-twitter" aria-hidden="true"></i><span>&nbsp;{{ site.twitter_username }}</span></a> <br />
-    <a href="https://www.linkedin.com/in/samantha-neilen-16153713"><i class="fa fa-linkedin" aria-hidden="true"></i><span>&nbsp;{{site.title}}</span></a>
+    <a href="https://www.linkedin.com/in/samantha-neilen-16153713"><i class="fa fa-linkedin" aria-hidden="true"></i><span>&nbsp;{{site.title}}</span></a><br />
+    Subscribe via <a href="{{ "/feed.xml" | relative_url }}">RSS</a>
 </section>
 <section class="sidebar-section">
-    <h3>Last posts </h3>    
+    <h3>Last posts </h3>
     {% for post in site.posts limit:5 %}
-        <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a> <br/>
-        <div class="last-posts-spacer"></div>
+    <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a> <br />
+    <div class="last-posts-spacer"></div>
     {% endfor %}
     <a href="{{ "/archive" | relative_url }}">Archive</a>
 </section>

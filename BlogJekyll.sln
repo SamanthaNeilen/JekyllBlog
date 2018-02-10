@@ -24,6 +24,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BlogJekyll", "BlogJekyll\",
 		SlnRelativePath = "BlogJekyll\"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{30C7374E-0FF6-409E-B025-0110831376E1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
