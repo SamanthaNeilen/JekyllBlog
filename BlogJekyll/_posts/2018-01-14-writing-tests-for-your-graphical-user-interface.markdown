@@ -195,6 +195,9 @@ public class WebTests
 {% endhighlight %}
 <h3>Running a single test on multiple browsers using a data source file</h3>
 <p>
+<b>[Edit Feb 16 2018]</b> Note that the solution described below works for projects using the Coded UI framework. When using the default Microsoft Test V2 framework, the use of the TestSettings files is deprecated and your tests will stay undiscoverable in the Test Explorer window. See the <a href="https://github.com/SamanthaNeilen/WebDriverTestApplication" target="">WebDriverTestApplication repository</a> for running tests with the MSTest V2 framework. <b>[End edit Feb 16 2018]</b>
+</p>
+<p>
 The default unit test framework from Microsoft can consume input files to run your tests for multiple data rows. In the following example I have added a CSV with the browsers names I want to test as data source. When this test is run the test will execute for each browser in sequence.
 </p>
 {% highlight c# %}
@@ -294,6 +297,9 @@ Sometimes Visual Studio will not automatically pick up the TestSettings file. If
 </p>
 <h3>Setting up a simple web test with Selenium</h3>
 <p>
+<b>[Edit Feb 16 2018]</b> Note that the solution described below works for projects using the Coded UI framework. When using the default Microsoft Test V2 framework, the use of the TestSettings files is deprecated and your tests will stay undiscoverable in the Test Explorer window. See the <a href="https://github.com/SamanthaNeilen/WebDriverTestApplication" target="">WebDriverTestApplication repository</a> for running tests with the MSTest V2 framework. <b>[End edit Feb 16 2018]</b>
+</p>
+<p>
 In this last section I wanted to show a web test using Selenium. To be able to use Selenium in your test project first add the Selenium.Support NuGet package. This package will also automatically add the Selenium.Webdriver package.
 <br/><img src="{{"/assets/images/20180114/SeleniumNuGetPackages.png" | relative_url }}" alt="Selenium NuGet Packages"/>
 </p>
@@ -321,7 +327,7 @@ using System.Linq;
 
 namespace CodedUITestTestApplication.Tests
 {
-    [TestClass]
+    [CodedUITest]
     public class WebTests
     {
         [TestMethod, DataSource("Browsers")]
@@ -333,27 +339,28 @@ namespace CodedUITestTestApplication.Tests
                 browserIdentifier = TestContext.DataRow[0].ToString();
             }
 
-            var driver = StartWebdriver(browserIdentifier);
+            using (var driver = StartWebdriver(browserIdentifier))
+            {
+                driver.Navigate().GoToUrl(new Uri(StartUrl));
 
-            driver.Navigate().GoToUrl(new Uri(StartUrl));
+                var nameTextBox = driver.FindElement(By.Id("Name"));
+                nameTextBox.SendKeys("Some Name");
 
-            var nameTextBox = driver.FindElement(By.Id("Name"));
-            nameTextBox.SendKeys("Some Name");
+                var submitButton = driver.FindElement(By.TagName("button"));
+                submitButton.Click();
 
-            var submitButton = driver.FindElement(By.TagName("button"));
-            submitButton.Click();
+                var header = driver.FindElement(By.Id("addCustomerHeader"));
+                Assert.IsTrue(header.Displayed);
 
-            var header = driver.FindElement(By.Id("addCustomerHeader"));
-            Assert.IsTrue(header.Displayed);
+                Assert.AreEqual(0, driver.FindElements(By.Id("Name-error")).Count);
 
-            Assert.AreEqual(0, driver.FindElements(By.Id("Name-error")).Count);
+                var expectedEmailvalidationMessage = string.Format(Messages.FieldRequired, Labels.EmailAddress);
+                var validationMessages = driver.FindElements(By.CssSelector(".field-validation-error"));
+                Assert.IsTrue(validationMessages.Any(element => element.Displayed 
+                    && ChildSpanContainsExpectedText(element, expectedEmailvalidationMessage)));
 
-            var expectedEmailvalidationMessage = string.Format(Messages.FieldRequired, Labels.EmailAddress);
-            var validationMessages = driver.FindElements(By.CssSelector(".field-validation-error"));
-            Assert.IsTrue(validationMessages.Any(element => element.Displayed && 
-			      ChildSpanContainsExpectedText(element, expectedEmailvalidationMessage)));
-
-            driver.Close();
+                driver.Close();
+            }
         }
 
         private static bool ChildSpanContainsExpectedText(IWebElement element, string expectedEmailvalidationMessage)
