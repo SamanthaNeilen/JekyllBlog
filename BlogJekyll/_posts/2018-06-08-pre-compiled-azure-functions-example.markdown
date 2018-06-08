@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Pre-compiled Azure Functions example"
-date:   2018-06-05 00:00:00 +0100
+date:   2018-06-08 00:00:00 +0100
 tags: Azure AzureFunctions
 ---
 <p>
