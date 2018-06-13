@@ -40,7 +40,7 @@ AzureStorageEmulator.exe init /server SQLEXPRESS
 </p>
 <p>
 	You can explore the contents of the endpoints using the Visual Studio Cloud Explorer window (found under the View main menu in Visual Studio) under the (Local) and then Storage Accounts node.
-	You can access the storage programmatically using the account name and key found on the <a href="https://docs.microsoft.com/nl-nl/azure/storage/common/storage-use-emulator" target="_blank">Microsoft Docs page</a> for the emulator. The access key and account are defaults and publicly known thus they are also included in the config and appsettings files in the projects of my <a href="https://github.com/SamanthaNeilen/AzureFunctionExamples" target="_blank">AzureFunctionExample GitHub repository</a>. 
+	You can access the storage programmatically using the account name and key found on the <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator" target="_blank">Microsoft Docs page</a> for the emulator. The access key and account are defaults and publicly known thus they are also included in the config and appsettings files in the projects of my <a href="https://github.com/SamanthaNeilen/AzureFunctionExamples" target="_blank">AzureFunctionExample GitHub repository</a>. 
 </p>
 <p>
 	Note that the Storage Emulator will shutdown when the computer is turned of and will need to be restarted to access it after rebooting your computer.

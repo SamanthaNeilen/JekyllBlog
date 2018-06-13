@@ -8,7 +8,7 @@ tags: TestAutomation
 In this blogpost I will be talking on how to create tests using Coded UI and Selenium. 
 </p>
 <p>
-Coded UI is the UI testing framework from Microsoft for testing any type of UI that runs on the windows platform. This means you can test websites as well as WPF or other windows applications. Coded UI is shipped as a module on Visual Studio. Currently Coded UI is only shipped with Visual Studio Enterprise editions. For the currently automatable configurations see <a href="https://docs.microsoft.com/nl-nl/visualstudio/test/supported-configurations-and-platforms-for-coded-ui-tests-and-action-recordings" target="_blank">Supported configurations and platforms forCoded UI tests and action recordings</a>.
+Coded UI is the UI testing framework from Microsoft for testing any type of UI that runs on the windows platform. This means you can test websites as well as WPF or other windows applications. Coded UI is shipped as a module on Visual Studio. Currently Coded UI is only shipped with Visual Studio Enterprise editions. For the currently automatable configurations see <a href="https://docs.microsoft.com/en-us/visualstudio/test/supported-configurations-and-platforms-for-coded-ui-tests-and-action-recordings" target="_blank">Supported configurations and platforms forCoded UI tests and action recordings</a>.
 </p>
 <p>
 Coded UI supports IE website testing out of the box and you can install an extension to run tests in other browsers including Edge using Selenium drivers (another UI test framework). Note that the <a href="https://marketplace.visualstudio.com/items?itemName=AtinBansal.SeleniumcomponentsforCodedUICrossBrowserTesting" target="_blank">Selenium Cross Browser tools</a> have not been updated in a while and is no longer fully compatible with the latest version of the Selenium implementation. Updating the Selenium drivers of the cross-browser tools to the latest version will break functionality like finding a dropdown on a page. Therefor I recommend using Selenium to test your website if you want to test in multiple and the latest browsers that are not Internet Explorer. You can also use Selenium to automate actions within the browser windows and use Coded UI to manipulate the browser application itself.  (For example controlling the browser dialog windows.) Also Selenium is free and open source. If you do not have a Visual Studio Enterprise edition, definitely look into Selenium.
@@ -390,6 +390,6 @@ namespace CodedUITestTestApplication.Tests
 <p>
 <a href="https://app.pluralsight.com/library/courses/codedui-test-automation/table-of-contents" target="_blank">Pluralsight- Coded UI</a><br/>
 <a href="https://app.pluralsight.com/library/courses/selenium/table-of-contents" target="_blank">Pluralsight- Selenium</a><br/>
-<a href="https://docs.microsoft.com/nl-nl/visualstudio/test/use-ui-automation-to-test-your-code" target="_blank">Microsoft docs - Use UI Automation To Test Your Code</a><br/>
+<a href="https://docs.microsoft.com/en-us/visualstudio/test/use-ui-automation-to-test-your-code" target="_blank">Microsoft docs - Use UI Automation To Test Your Code</a><br/>
 <a href="http://www.seleniumhq.org/" target="_blank">Selenium HQ</a><br/>
 </p>
