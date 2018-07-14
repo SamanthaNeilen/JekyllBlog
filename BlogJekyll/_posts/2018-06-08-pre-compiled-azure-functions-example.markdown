@@ -353,7 +353,7 @@ public class MailData
 public static void Run([QueueTrigger("messages", Connection = "AzureWebJobsStorage")]QueueMessage myQueueItem, TraceWriter log)
 {
 	var dbContext = OrderDbContext.GetInstance(Environment.GetEnvironmentVariable("OrderDbConnection"));
-	var order = dbContext.Order.Include(o => o.Person).FirstOrDefault(o => o.Id == myQueueItem.Order && o.PersonID == myQueueItem.Order);
+	var order = dbContext.Order.Include(o => o.Person).FirstOrDefault(o => o.Id == myQueueItem.Order && o.PersonID == myQueueItem.Person);
 
 	var mailData = new MailData
 	{
@@ -461,7 +461,7 @@ public static void Run([QueueTrigger("messages", Connection = "AzureWebJobsStora
         Environment.GetEnvironmentVariable("BlobStorageKey")
         );
 
-    var order = dbContext.Order.Include(o => o.Person).FirstOrDefault(o => o.Id == myQueueItem.Order && o.PersonID == myQueueItem.Order);
+    var order = dbContext.Order.Include(o => o.Person).FirstOrDefault(o => o.Id == myQueueItem.Order && o.PersonID == myQueueItem.Person);
 
     var mailData = new MailData
     {
@@ -565,7 +565,7 @@ public static void Run([QueueTrigger("messages", Connection = "AzureWebJobsStora
         Environment.GetEnvironmentVariable("BlobStorageKey")
         );
 
-    var order = dbContext.Order.Include(o => o.Person).FirstOrDefault(o => o.Id == myQueueItem.Order && o.PersonID == myQueueItem.Order);
+    var order = dbContext.Order.Include(o => o.Person).FirstOrDefault(o => o.Id == myQueueItem.Order && o.PersonID == myQueueItem.Person);
 
     var mailData = new MailData
     {
