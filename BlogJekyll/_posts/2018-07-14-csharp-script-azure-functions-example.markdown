@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "C# script Azure Functions example"
-date:   2018-06-08 00:00:00 +0100
+date:   2018-07-14 00:00:00 +0100
 tags: Azure AzureFunctions
 ---
 <p>
