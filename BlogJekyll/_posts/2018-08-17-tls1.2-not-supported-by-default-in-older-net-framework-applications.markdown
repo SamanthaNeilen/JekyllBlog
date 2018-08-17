@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "TLS1.2 not supported by default in older .NET Framework applications"
+date:   2018-08-17 00:00:00 +0100
+tags: 
+---
+Lately more and more API providers have been disabling TLS 1.1 for their servers and are currently only accepting the TLS 1.2 protocol for establishing a HTTPS connection to their servers. TLS takes care of the encryption of the HTTPS communication and TLS1.2 was introduced in 2008. It is more secure (harder to decrypt) than the previous versions.
+
+You may encounter that establishing a HTTPS connection to a 3rd party may suddenly fail without there having been any new code changes or deployments. This may be due to the fact that the 3rd party has decided to no longer accept TLS 1.1 or below for HTTPS connections. 
+
+I ran into this myself again this week because I used a PowerShell command to execute C# code to retrieve a bearer access token from Azure leveraging the ADAL dll’s. It suddenly did not work anymore last week and after some Googling I found a similar error that was solved by adding the TLS1.2 protocol to the ServicePointManager.SecurityProtocol property. I have needed to do this before in several older C# applications and it inspired me to write this blogpost today.
+
+If you face the exception “The server forcibly closed the connection” this may be an indication that the ServicePointManager no longer has a compatible protocol to establish a HTTPS connection with the server. 
+
+The ServicePointManager is a static class .Net Framework class that will always choose the highest (securest) protocol available from the SecurityProtocol property and will only fall back to a previous version if the highest is not supported.
+
+Use a debugger to inspect the ServicePointManager.SecurityProtocol value to see if TLS 1.2 is listed, to determine whether or not this may be the cause of your connection issues. 
+This is usually the cause when using older .Net Framework versions (< 4.7) as is it was with my PowerShell.
+
+In C# use the code below to append the current security protocols with TLS1.2 before establishing the connection to the server or put this code snippet in your Global.asax startup.  
+
+{% highlight C# %}
+    ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12
+{% endhighlight %}
+
+
+When using powershell use the command below to check the current default protocols as used in Powershell:
+{% highlight PowerShell %}
+ [Net.ServicePointManager]::SecurityProtocol
+{% endhighlight %}
+
+You can set the TLS1.2 protocol if it’s not listed by using: 
+{% highlight PowerShell %}
+[Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12 
+{% endhighlight %}
+
+Older version of PowerShell may not support this syntax. Use the syntax below set the most common protocols:
+
+{% highlight PowerShell %}
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Ssl3,  [Net.SecurityProtocolType]::Tls, [Net.SecurityProtocolType]::Tls12 
+{% endhighlight %}
+
+Remember: when appending or setting the ServicePointManager.SecurityProtocol property to a set value in your code, you may have to revisit this at a later time when newer TLS protocols become the new standard.
+
+For more information on this subject visit the reference websites below:
+
+[Wikipedia page for Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security "Wikipedia page for Transport Layer Security"){:target="_blank"}
+
+[Microsoft Docs page on the ServicePointManager.SecurityProtocol property](https://docs.microsoft.com/en-us/dotnet/api/system.net.servicepointmanager.securityprotocol?redirectedfrom=MSDN&view=netframework-4.7.2#System_Net_ServicePointManager_SecurityProtocol "Microsoft Docs page on the ServicePointManager.SecurityProtocol property"){:target="_blank"}
+
+
+
+
+
+
+ 
