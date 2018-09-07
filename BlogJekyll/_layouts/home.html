@@ -4,20 +4,21 @@ layout: default
 <div>
     {% assign postCount = site.posts|size %}
     {% if postCount > 0  %}
-        {% for post in site.posts  %}
-            <article>
-                <header class="article-header">
-                    <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-                </header>
-                {% assign date_format = siteminima.date_format | default: "%b %-d, %Y" %}
-                <span>{{ post.date | date: date_format }}</span> <br/>
-                Tags: {% for tag in post.tags %}
-                        {{tag}}
-			           {% endfor %}
-                <div class="article-content">
-                    {{ post.content}}
-                </div>
-            </article>
+    {% for post in site.posts limit:5 %}
+    <article>
+        <header class="article-header">
+            <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </header>
+        {% assign date_format = siteminima.date_format | default: "%b %-d, %Y" %}
+        <span>{{ post.date | date: date_format }}</span> <br />
+        Tags: {% for tag in post.tags %}
+        {{tag}}
         {% endfor %}
+        <div class="article-content">
+            {{ post.content}}
+        </div>
+    </article>
+    {% endfor %}
+    <center><p><a href="{{ "/archive" | relative_url }}">For additional posts see the archive page for an overview of all available posts</a></p></center>
     {% endif %}
 </div>
