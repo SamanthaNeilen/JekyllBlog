@@ -2,7 +2,7 @@
 layout: post
 title:  "Using route constraints for input validation and improved security"
 date:   2018-10-09 00:00:00 +0100
-tags: MVC WebApi
+tags: MVC WebAPI
 ---
 In .Net web applications you use the routing system to expose URLs and endpoints in your application. If your method has a framework value type like int then the routing engine will automatically parse your inputs to these types.  
 
