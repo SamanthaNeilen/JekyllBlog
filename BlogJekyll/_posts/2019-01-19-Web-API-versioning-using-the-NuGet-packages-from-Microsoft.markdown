@@ -212,6 +212,8 @@ Finally change the Configure method as shown below to enable the version selecti
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
 {
+    // other code omitted 
+
     app.UseSwagger();
 
     app.UseSwaggerUI(c =>
