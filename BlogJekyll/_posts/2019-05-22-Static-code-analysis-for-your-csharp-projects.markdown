@@ -10,9 +10,9 @@ Static code analysis analyzes your source code or compiled dll files for certain
 
 The older Code Analysis features in Visual Studio (Analyze > Run Code Analysis option) and Project properties (Code Analysis tab) are marked as deprecated and will not be covered in this post.
 
-### Visual Studio build in analyzers
+### Visual Studio built in analyzers
 
-The Visual Studio compiler (Roslyn) already has some build in analyzer rules. When loading a project (like the [eShopOnWeb](https://github.com/dotnet-architecture/eShopOnWeb) reference implementation) and opening a file, the analyzers installed in Visual Studio will analyze the file and show any error, warning or information message in the Visual Studio error list window. 
+The Visual Studio compiler (Roslyn) already has some built in analyzer rules. When loading a project (like the [eShopOnWeb](https://github.com/dotnet-architecture/eShopOnWeb) reference implementation) and opening a file, the analyzers installed in Visual Studio will analyze the file and show any error, warning or information message in the Visual Studio error list window. 
 
 ![[Default style messages]]({{"/assets/images/20190622/Default-style-messages.png" | relative_url }})
 
