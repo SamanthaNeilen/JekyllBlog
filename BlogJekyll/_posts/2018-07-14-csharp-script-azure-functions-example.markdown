@@ -13,16 +13,19 @@ If you would like to know more about compiled Azure Functions using the Visual S
 <p>
 All the code from the following example can also be found in my <a href="https://github.com/SamanthaNeilen/AzureFunctionExamples" target="_blank">AzureFunctionExample repository</a> in the solution folder AzureFunction_CsharpScript.
 </p>
-<h3>Create an C# script Azure Function</h3>
+**Table of contents:**
+* Table of Contents
+{:toc}
+### Create an C# script Azure Function
 <p>
 Install npm and nodejs from the <a href="https://nodejs.org/en/" target="_blank">nodejs website</a>.
 </p>
-Install npm azure functions core tools using the command line. I used the v1 (.Net Framework version) using the command below. 
+Install npm azure functions core tools using the command line. I used the v1 (.NET Framework version) using the command below. 
 {% highlight shell %}
 npm install -g azure-functions-core-tools
 {% endhighlight %}
 <p>
-Append the package name with @core to install de v2 version. The v2 version is built on .Net Core and is currently still in preview (the same as with the compiled Azure Functions)
+Append the package name with @core to install de v2 version. The v2 version is built on .NET Core and is currently still in preview (the same as with the compiled Azure Functions)
 </p>
 <p>
 The files for the azure-function-core-tools are placed in %USER%\AppData\Roaming\npm on your disk.
@@ -145,7 +148,7 @@ Next set a breakpoint in the run.csx and use the QueueMessage project from my <a
 <br/><img src="{{"/assets/images/20180714/debug-run.csx.png" | relative_url }}" alt="debug run.csx"/>
 </p>
 <p>
-For extra methods and simple Azure Functions you could create all extra classes and methods in the run.csx file. For better maintainability create classes and extra code into separate C# script (.csx) files or in a separate class library compiled to a dll. You can also reference the .Net assemblies that are available for the Azure Function runtime. For more information see the <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-csharp" target="_blank"> Microsoft Docs on C# script</a>.
+For extra methods and simple Azure Functions you could create all extra classes and methods in the run.csx file. For better maintainability create classes and extra code into separate C# script (.csx) files or in a separate class library compiled to a dll. You can also reference the .NET assemblies that are available for the Azure Function runtime. For more information see the <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-csharp" target="_blank"> Microsoft Docs on C# script</a>.
 </p>
 <p>
 In my <a href="https://github.com/SamanthaNeilen/AzureFunctionExamples" target="_blank">AzureExampleFunctions repository</a>. I’ve created a QueueMessage.csx class used to convert the input queuemessage from a string to an object instance. First add a QueueMessage.csx file to the ProcessMessageScriptV1 Function folder with the definition of the QueueMessage class (as shown below). There are no using or namespace definitions in the file. Next use the #load “QueueMessage.csx” statement in the run.csx to complete the reference binding and change the type for myQueueItem from string to QueueMessage. The code should look as below:
@@ -187,10 +190,10 @@ Next run the Function to see that the myQueueItem is successfully converted from
 <p>
 Extra .csx files can also be placed in subfolders. If QueueMessage.csx was placed in a subfolder called helpers you would use the #load “helpers/QueueMessage.csx” in the run.csx file. The #load statement contains a relative path to the file. See the <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-csharp#reusing-csx-code" target="_blank"> Microsoft Docs on C# script</a> for examples.
 </p>
-<h3>Referencing a custom dll in an Azure Script Function</h3>
+### Referencing a custom dll in an Azure Script Function
 <p>
 Next I can create separate dll containing a Data Access Layer and reference it in my script Function. 
-(I couldn’t use the AzureFunctionExample.ResourceAccess library already present in the solution because I got exceptions that EntityFrameworkCore was not supported on the platflorm). Just add a .Net Framework library with the Entity Framework package and define the data access classes below:
+(I couldn’t use the AzureFunctionExample.ResourceAccess library already present in the solution because I got exceptions that EntityFrameworkCore was not supported on the platflorm). Just add a .NET Framework library with the Entity Framework package and define the data access classes below:
 </p>
 <p>Order class:</p>
 {% highlight C# %}
@@ -322,7 +325,7 @@ public static void Run(QueueMessage myQueueItem, TraceWriter log)
 {% endhighlight %}
 <p>
 By referencing dll or just using .csx files you can create pretty complex C# script Functions with the same functionality as a pre-compiled Azure Function.
-<h3>Run and test in the Azure Portal</h3>
+### Run and test in the Azure Portal
 <p>
 The command line offers a login and publish command to push your local Function app to a hosted Azure Function App. Another way you can upload the files is via de App Service Editor under the Platform Settings for an Azure App Function in the Azure Portal. Remember to copy the key value pairs from the appsettings.json to the Application Settings page of the Azure Function App in the portal.
 </p>

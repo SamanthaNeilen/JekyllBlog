@@ -6,6 +6,10 @@ date:   2019-08-10 00:00:00 +0100
 tags: UX UserInterface
 ---
 
+**Table of contents:**
+* Table of Contents
+{:toc}
+
 ### [Bootstrap](https://getbootstrap.com/)
 
 When creating a new website with .NET Core, the template will already contain the Bootstrap design framework. This framework uses a grid system for creating a layout, has some out-of-the-box styled controls like dropdowns and tabs and has an icon set to use. Next to the default color scheme it has some guidance on how to create your own color schemes. Bootstrap also has an eco-system of templates based on Bootstrap to get inspiration for your own designs. 

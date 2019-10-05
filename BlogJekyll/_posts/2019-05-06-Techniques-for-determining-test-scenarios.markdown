@@ -16,6 +16,10 @@ The techniques are describe identifying all possible test scenarios for 100% cov
 
 Testing techniques are divided into white and black box techniques. White box techniques look at the actual statements of the source code to determine test cases. Black box techniques use specifications to determine if outputs are correct when providing inputs. 
 
+**Table of contents:**
+* Table of Contents
+{:toc}
+
 ### Equivalence class and boundary partitioning (black box technique)
 
 Equivalence class partitioning is a technique for partitioning possible inputs into possible valid and invalid scenarios. 

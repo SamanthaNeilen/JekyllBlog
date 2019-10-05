@@ -4,16 +4,21 @@ title:  "Tips for making your code more suitable for unit testing"
 date:   2017-12-29 00:00:00 +0100
 tags: TestAutomation
 ---
-<p>
+
 Unit tests are important to test your business logic. Unit tests should not call actual services or the database and they should be able to run within a few minutes.
 In this blogpost I want to give a few tips on how to make your codebase more suitable for writing unit tests.
 </p>
-<h3>Interfaces and dependency injection</h3>
+**Table of contents:**
+* Table of Contents
+{:toc}
+
+### Interfaces and dependency injection
 <p>
 When dealing with legacy code you will often find that different functional classes are called with the new keyword throughout other functional classes. This will often get in the way of writing a true unit test that only tests the method that you are working on.
 Mitigate the problem by extracting an interface for the class whose functionality you want to access and instead pass the interface into the constructor of the class that will use the class. 
 An example of code that instantiates a direct link to an Entity Framework database context is shown below.
 </p>
+
 {% highlight c# %}
 public class CustomerService
 {
@@ -42,6 +47,7 @@ public class CustomerService
     }
 }
 {% endhighlight %}
+
 <p>
 The GetCustomerOverview method above cannot be unit tested because all calls to the method will actually instantiate the Entity Framework context with a actual calls to the underlying database.
 A refactored CustomerService with interfaces passed through the constructor is shown below.
@@ -99,12 +105,12 @@ Now you can create a unit test to the GetCustomerOverview method. I will describ
 If you are not using Entity Framework Code First but using the database designer, you must create a separate partial class of your DbContext and set the interface inheritance in the new custom partial class. If you add an interface in the generated file, it will be lost at the next code generation from the model.
 </p>
 <p>
-Making sure that all dependencies are passed to a class via the constructor is called dependency injection. To ensure that you do not have to new up all the dependencies in the constructors in the UI or other top layer of your application you can leverage a framework like <a href="https://msdn.microsoft.com/en-us/library/dn178463(v=pandp.30).aspx" target="_blank">Unity</a> to handle all the dependency injection for you. An example of this can be found in my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="_blank">ECommerceSampleApplication repository</a> in the ECommerceApp.NetFramework.Web project. The Unity NuGet packages combined with a unity configuration file section map all the interfaces with the concrete implementations. .Net Core has a built in dependency injection framework.
+Making sure that all dependencies are passed to a class via the constructor is called dependency injection. To ensure that you do not have to new up all the dependencies in the constructors in the UI or other top layer of your application you can leverage a framework like <a href="https://msdn.microsoft.com/en-us/library/dn178463(v=pandp.30).aspx" target="_blank">Unity</a> to handle all the dependency injection for you. An example of this can be found in my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="_blank">ECommerceSampleApplication repository</a> in the ECommerceApp.NETFramework.Web project. The Unity NuGet packages combined with a unity configuration file section map all the interfaces with the concrete implementations. .NET Core has a built in dependency injection framework.
 </p>
 <p>
 When writing tests you will want to call only specific calls of an interface during a test. You can use a mocking framework like Moq to create and verify fake behavior on interface calls. More information and examples of Moq can be found <a target="_blank" href="https://github.com/Moq/moq4/wiki/Quickstart">here</a>.
 </p>
-<h3>Mocking Entity Framework</h3>
+### Mocking Entity Framework
 <p>
 When using Entity Framwork 6 and onward you can use the mock implementation in <a href="https://msdn.microsoft.com/en-us/library/dn314431(v=vs.113).aspx" target="_blank">this MSDN post</a> to simulate an entity framework without having to use a mocking framework to mock out all the calls.
 </p>
@@ -166,9 +172,9 @@ public class MockECommerceDbContext : IECommerceDbContext
 The implementation of the TestDbSet is found in the MSDN post referenced earlier in this section.
 When using Entity Framework below version 6 look at the same MSDN post on how to write unit tests using interfaces and mock classes for the Entity Framework database context.
 </p>
-<h3>Dealing with 3rd party classes</h3>
+### Dealing with 3rd party classes
 <p>
-When writing .Net code you will probably use NuGet packages or other 3rd party references that do not always have interfaces available. 
+When writing .NET code you will probably use NuGet packages or other 3rd party references that do not always have interfaces available. 
 The class below uses 2 external packages. FileHelpers to enable CSV exports and DotNetZip to create a ZipFile on the filesystem. 
 </p>
 {% highlight c# %}

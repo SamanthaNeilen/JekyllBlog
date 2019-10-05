@@ -12,9 +12,13 @@ For more information on how the authentication methods provided by Azure Active 
 
 Also a great comprehensive resource around Azure Active Directory security is the ["Azure Active Directory for Developers" Pluralsight course](https://app.pluralsight.com/library/courses/azure-active-directory-developers/table-of-contents).
 
+**Table of contents:**
+* Table of Contents
+{:toc}
+
 ### Azure Active Directory security for a user using a browser (OpenID Connect)
 
-When using Azure Active Directory for a user, the actual authentication process will happen outside of your application via the [OpenID Connect authentication scheme](https://openid.net/connect/). When an unauthenticated user uses a browser to navigate to your application, the middleware code will redirect the user to a Microsoft hosted login page. When the user provides the correct credentials, the login page will redirect the authenticated user back to a specified redirect URL in your application.
+When using Azure Active Directory for a user, the actual authentication process will happen outside of your application via the [OpenID Connect authentication scheme](https://openid.NET/connect/). When an unauthenticated user uses a browser to navigate to your application, the middleware code will redirect the user to a Microsoft hosted login page. When the user provides the correct credentials, the login page will redirect the authenticated user back to a specified redirect URL in your application.
 
 There are already great guides and sample application from Microsoft on how to get started with Azure Active Directory in your web applications.
 

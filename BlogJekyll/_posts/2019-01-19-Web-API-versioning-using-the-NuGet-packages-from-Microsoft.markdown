@@ -20,11 +20,15 @@ Microsoft.AspNet. WebApi.Versioning.ApiExplorer
 
 The ApiExplorer package is only needed when using the API metadata for each version (like for Swagger documentation). 
 
-In this blogpost I will describe how to enable versioning for your API including version support for the Swagger UI documentation. This blogpost will only describe these steps for a .NET Core projects. A complete solution with the code can be found in my [WebApiExamples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples " WebApiExamples GitHub repository "). A .NET Framework example can be found on the [Microsoft.Asp.Net.WebApi.Versioning github repository for a sample project](https://github.com/Microsoft/aspnet-api-versioning/tree/master/samples/webapi/SwaggerWebApiSample "Microsoft.Asp.Net.WebApi.Versioning github repository for a sample project"). The default Startup classes for the .NET Framework will need to be set up a little different from a project without versioning.  
+In this blogpost I will describe how to enable versioning for your API including version support for the Swagger UI documentation. This blogpost will only describe these steps for a .NET Core projects. A complete solution with the code can be found in my [WebApiExamples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples " WebApiExamples GitHub repository "). A .NET Framework example can be found on the [Microsoft.Asp.NET.WebApi.Versioning github repository for a sample project](https://github.com/Microsoft/aspnet-api-versioning/tree/master/samples/webapi/SwaggerWebApiSample "Microsoft.Asp.NET.WebApi.Versioning github repository for a sample project"). The default Startup classes for the .NET Framework will need to be set up a little different from a project without versioning.  
 
 A small disclaimer: I will only show how to get started with versioning. When creating a new version, you should always think about support for previous versions or graceful degradation. Especially when you do database or schema changes. You must be careful not to break a previous version and may have to support multiple classes (or even database objects) with v1, v2 etcetera in their name or namespace if they are still used in a previous supported version. It is always a good idea when building an API to have integration tests. Having regression tests for the previous versions can ensure not breaking those versions while focusing on the new version.
 
-The [Microsoft.Asp.Net.WebApi.Versioning github repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.Net.WebApi.Versioning github repository wiki") contains all the documentation for the configuration and possibilities of the Microsoft.Asp.Net.WebApi.Versioning packages.
+The [Microsoft.Asp.NET.WebApi.Versioning github repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.NET.WebApi.Versioning github repository wiki") contains all the documentation for the configuration and possibilities of the Microsoft.Asp.NET.WebApi.Versioning packages.
+
+**Table of contents:**
+* Table of Contents
+{:toc}
 
 ### Minimal configuration for versioning
 
@@ -309,6 +313,6 @@ The Tag list contains a hardcoded name here that is not present when switching t
 
 For more information on all the features and configuration of the versioning packages visit the link below.
 
- [Microsoft.Asp.Net.WebApi.Versioning github repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.Net.WebApi.Versioning github repository wiki") 
+ [Microsoft.Asp.NET.WebApi.Versioning github repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.NET.WebApi.Versioning github repository wiki") 
 
  

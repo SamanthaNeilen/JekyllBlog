@@ -18,7 +18,7 @@ To set up a VSTS project visit <a href="https://www.visualstudio.com/team-servic
 <p>
 <h3>Setting up a build</h3>
 <p>
-In this example I will be setting up a build for my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="blank">ECommerceSampleApplication repository</a> that is hosted on GitHub. It contains a .Net Framework 4.6.1 MVC application, a supporting database project and some unit tests.
+In this example I will be setting up a build for my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="blank">ECommerceSampleApplication repository</a> that is hosted on GitHub. It contains a .NET Framework 4.6.1 MVC application, a supporting database project and some unit tests.
 </p>
 <p>
 First go to your team project. Go to the builds section under Build and Release. Then click the New button to start a new build definition.
@@ -33,7 +33,7 @@ After clicking continue you get the option of selecting a specific build templat
 <br/><img src="{{"/assets/images/20180210/SelectBuildTemplate.png" | relative_url }}" alt="Select A Build Template"/>
 </p>
 <p>
-I chose the ASP.Net project template. It gets my sources, restores my NuGet packages, builds the solution, runs the unittests, sets up publishing of the pdb files for remote debugging and publishes the build artifacts (project output) to the VSTS deployment/download location. 
+I chose the ASP.NET project template. It gets my sources, restores my NuGet packages, builds the solution, runs the unittests, sets up publishing of the pdb files for remote debugging and publishes the build artifacts (project output) to the VSTS deployment/download location. 
 <br/><img src="{{"/assets/images/20180210/BuildSolutionStepDefaults.png" | relative_url }}" alt="Build Solution Step Defaults"/>
 </p>
 <p>

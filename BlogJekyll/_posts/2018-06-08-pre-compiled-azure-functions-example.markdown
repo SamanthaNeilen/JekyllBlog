@@ -24,10 +24,15 @@ tags: Azure AzureFunctions
 	I used a separate class library to demonstrate that referencing other project libraries works the same as other project types. Complex Azure Functions can be build as a small microservice with a layer architecture to separate your execution/workflow, business logic and resource access into separate libraries.
 </p>
 <p>
- 	In my example repository I used and referenced a .Net Standard 2.0 library by both an Azure Function v1 and v2 project but you can also add a class library matching the framework version of the Azure Function project. The code executed by the Functions is the same, just the underlying Framework and Azure Function runtime differs. Note that when installing NuGet package on a project it may reference different dll versions and dependencies with the same NuGet package version for the different Standard, Core and Framework projects. So when the referenced dependencies on the class library and executing project do not match it may result in runtime errors because expected DLL versions do not match on the executing project. An example of this is the WindowsAzure.Storage package version as shown below.
+ 	In my example repository I used and referenced a .NET Standard 2.0 library by both an Azure Function v1 and v2 project but you can also add a class library matching the framework version of the Azure Function project. The code executed by the Functions is the same, just the underlying Framework and Azure Function runtime differs. Note that when installing NuGet package on a project it may reference different dll versions and dependencies with the same NuGet package version for the different Standard, Core and Framework projects. So when the referenced dependencies on the class library and executing project do not match it may result in runtime errors because expected DLL versions do not match on the executing project. An example of this is the WindowsAzure.Storage package version as shown below.
  <br/><img src="{{"/assets/images/20180608/AzureStoragePackageVersionDifferences.png" | relative_url }}" alt="AzureStorage Package Version Differences"/>
  </p>
-<h3>Set up and run the storage emulator</h3>
+
+**Table of contents:**
+* Table of Contents
+{:toc}
+
+### Set up and run the storage emulator
 <p> 
 	In the windows programs or start menu find and start the Azure Storage Emulator. I encountered some issues starting the Azure Storage Emulator using the default LocalDB instance due to path naming and/or access rights, however I did manage to set up the needed database on my local SQLExpress instance. To force the Azure Storage Emulator to initialize on a named SQL instance instead of the default LocalDB use the command below and replace SQLExpress with the name of the SQL Server instance that you wish to use: 
 </p>
@@ -45,9 +50,9 @@ AzureStorageEmulator.exe init /server SQLEXPRESS
 <p>
 	Note that the Storage Emulator will shutdown when the computer is turned of and will need to be restarted to access it after rebooting your computer.
 </p>
-<h3>Create a simple NetCore console application to post a queue message</h3>
+### Create a simple NetCore console application to post a queue message
 <p>
-	After the Azure Storage Emulator is running you can create a simple console application to post a message to the local queue storage. First create a new .Net Core Console application.	
+	After the Azure Storage Emulator is running you can create a simple console application to post a message to the local queue storage. First create a new .NET Core Console application.	
 	Next add an appsettings.json file to store any credentials and settings. Fill it with the content shown below and be sure to mark the file as "Copy to Output Directory" with a value of always in the file properties window.
 </p>
 {% highlight json %}
@@ -125,18 +130,18 @@ namespace QueueMessageClient
 <p>
 	To post a message to an actual Azure Blob Storage, simply replace the access credentials and storage uri to values associated to an existing Azure Blob Storage.
 </p>
-<h3>Create a local database</h3>
+### Create a local database
 <p>
 	I've added a simple database project to my example solution. Create a local database in your SQL Instance, do a Schema Compare and create the tables and then run the testdata script included for a few records of data.
 	(For more information on these steps outlined see my <a href="https://samanthaneilen.github.io/2017/11/24/managing-a-sql-server-database-from-a-visual-studio-database-project.html" target="_blank">previous blog post</a> on using a database project.
 </p>
-<h3>Create an Azure Function project</h3>
+### Create an Azure Function project
 <p>
 	The Azure Function project can be found under the cloud category (the Azure workload needs to be installed). When you create a project you immediately get a popup asking what kind of function you want to create within the project.
 	<br/><img src="{{"/assets/images/20180608/AzureFunctionProject.png" | relative_url }}" alt="Azure Function Project"/>
 </p>
 <p>
-	Notice the popup for the version of your function. Azure Functions V1 is based on the full .Net Framework and currently supports more triggers and bindings than the Azure Functions V2 that is currently still in preview and is based on the .Net Standard Framework. The choices for the kind of Azure Function to create with the project are actually limited to the most common ones. If you do not see the trigger you want to use, select the empty option and use the File then New option in the project context menu in the Solution Explorer to add a new Azure Function.	
+	Notice the popup for the version of your function. Azure Functions V1 is based on the full .NET Framework and currently supports more triggers and bindings than the Azure Functions V2 that is currently still in preview and is based on the .NET Standard Framework. The choices for the kind of Azure Function to create with the project are actually limited to the most common ones. If you do not see the trigger you want to use, select the empty option and use the File then New option in the project context menu in the Solution Explorer to add a new Azure Function.	
 </p>
 <p>
 Function V1 default trigger dialog:
@@ -248,7 +253,7 @@ public class QueueMessage
 After doing this you can see in the debugger that you get a nice object input ready for use in your function code. 
 <br/><img src="{{"/assets/images/20180608/DebugSerializedInput.png" | relative_url }}" alt="Debug Serialized Input"/>	
 </p>
-<h3>Access the database using Entity Framework Core</h3>
+### Access the database using Entity Framework Core
 <p>
 For the data access framework I will be using Entity Framework Core. Add the Microsoft.EntityFrameworkCore.SqlServer NuGet package to your Function project or a referenced class library and specify a database context as shown below:
 </p>
@@ -371,7 +376,7 @@ public static void Run([QueueTrigger("messages", Connection = "AzureWebJobsStora
 <p>
 Debug or log the contents of the MailSettings object instance to check if the database data is retrieved as expected.
 </p> 
-<h3>Retrieve an emailtemplate file from a blobstorage</h3>
+### Retrieve an emailtemplate file from a blobstorage
 <p>
 First create a emailtemplate html as shown below and upload it to an emaltemplate container in your local development blob storage. The text between brackets will be replaced with the data we retrieved from the database before sending the email.
 </p>
@@ -477,7 +482,7 @@ public static void Run([QueueTrigger("messages", Connection = "AzureWebJobsStora
 }
 {% endhighlight %}
 <p>
-When calling this code from the Azure Function V1 (Framework project), referencing a .Net Standard 2.0 library you will get a runtime error because as stated before referenced dll versions in the referenced SDK NuGet package do not match.
+When calling this code from the Azure Function V1 (Framework project), referencing a .NET Standard 2.0 library you will get a runtime error because as stated before referenced dll versions in the referenced SDK NuGet package do not match.
 <br/><img src="{{"/assets/images/20180608/AzureStorageDLLVersionError.png" | relative_url }}" alt="AzureStorageDLLVersionError"/>
 <br/><img src="{{"/assets/images/20180608/AzureStoragePackageVersionDifferences.png" | relative_url }}" alt="AzureStorage Package Version Differences"/>
 <br/>
@@ -487,7 +492,7 @@ To resolve this issue add the matching Windows Azure Storage version NuGet packa
 <p>
 Again you can use the console or debugger to verify that the retrieved string matches the contents of the uploaded file. 
 </p>
-<h3>Send an email using the SendGrid email client</h3>
+### Send an email using the SendGrid email client
 <p>
 Now that we have all the settings data and a html string with placeholders for the data, we can add a sendemailservice to our project. (There is also an output binding that can send an email using a Azure SendGrid resource as explained <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-sendgrid" target="_blank">here</a>) but I prefer creating a custom serviceclient because you can change the implementation to use another online emailing service if needed and have more control for error handling.
 </p>
@@ -501,7 +506,7 @@ using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using System.NET;
 
 namespace AzureFunctionExample.ResourceAccess
 {
@@ -586,7 +591,7 @@ public static void Run([QueueTrigger("messages", Connection = "AzureWebJobsStora
 <p>
 Next run the function to send an email with your SendGrid account. (Some servers or domain names may have the SendGrid domain blacklisted and deny delivery but you can verify mails send in your SendGrid account under the Activity setting) 
 </p>
-<h3>Some notes on publishing to Azure</h3>
+### Some notes on publishing to Azure
 <p>Sometimes a publish to a new Azure Function app fails because the Function app resource is not created fast enough. Usually a second publish will succeed.</p>
 <p>You cannot publish a version 1 Azure Function to a version 2 Azure Function app and publishing an Azure Function v2 app to an existing v1 app will cause a pop-up asking if you want to upgrade the version.</p>
 <p>Publishing will not create the appropriate Application Setting keys for the Azure Function app in Azure. You will have to create them separately in the Azure portal.</p>

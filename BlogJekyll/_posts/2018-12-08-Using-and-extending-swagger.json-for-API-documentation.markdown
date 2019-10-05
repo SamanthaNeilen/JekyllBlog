@@ -63,6 +63,10 @@ Below is screenshot of the UI for the Swagger.json as generated for the definiti
  
 In this blogpost I will show you how to how to enable Swagger UI for your .NET Framework and Core web projects. Be aware that in .NET Framework only API Controller methods will be listed. MVC Controllers and actions will not be listed. 
 Next I will show some customizations to the default generated Swagger.json and Swagger UI. For these customizations I will only list the .NET Core code. The .NET Framework (as well as the .NET Core) implementation can be found in my [WebApiExamples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples " WebApiExamples GitHub repository "){:target="_blank"}.
+
+**Table of contents:**
+* Table of Contents
+{:toc}
  
 ### Configure the generation of a Swagger.json file
  

@@ -4,9 +4,9 @@ title:  "Using route constraints for input validation and improved security"
 date:   2018-10-09 00:00:00 +0100
 tags: MVC WebAPI
 ---
-In .Net web applications you use the routing system to expose URLs and endpoints in your application. If your method has a framework value type like int then the routing engine will automatically parse your inputs to these types.  
+In .NET web applications you use the routing system to expose URLs and endpoints in your application. If your method has a framework value type like int then the routing engine will automatically parse your inputs to these types.  
 
-Also if you the default convention based route in a .Net Framework MVC web application uses the convention below:
+Also if you the default convention based route in a .NET Framework MVC web application uses the convention below:
 
 {% highlight C# %}
 routes.MapRoute(
@@ -64,12 +64,16 @@ public IActionResult Get(string input)
 
 By using route constraints you can avoid cluttering controllers with validation code and routing logic inside your controller methods. Using route constraints will also add security benefits. If a route is not found the processing will stop quite early in the processing pipeline and return a 404 not found exception. This 404 exception will also never include sensitive internal information about a specific method that was being processed.
 
-In this blogpost I will be describing the default route constraints provided by the .Net Frameworks and how to create custom constraints to make sure a method or route only gets hit by the intended input.
+In this blogpost I will be describing the default route constraints provided by the .NET Frameworks and how to create custom constraints to make sure a method or route only gets hit by the intended input.
 
 I have created a [reference project on GitHub](https://github.com/SamanthaNeilen/WebApiExamples "reference project on GitHub"){:target="_blank"} where all code snippets described in the rest of this blogpost can be found in a running project including integration tests demonstrating the working and denied routes.
 
-### Route constraints in a .Net Framework web application for MVC controllers
-Create a new .Net Framework web application using the MVC template. Next navigate to the Controllers/Home.cs file. The parameterless methods for showing the homepage, contact and about page are already listed. The default template uses the convention based routing by default. The default route template is defined in App_Start/RouteConfig.cs.
+**Table of contents:**
+* Table of Contents
+{:toc}
+
+### Route constraints in a .NET Framework web application for MVC controllers
+Create a new .NET Framework web application using the MVC template. Next navigate to the Controllers/Home.cs file. The parameterless methods for showing the homepage, contact and about page are already listed. The default template uses the convention based routing by default. The default route template is defined in App_Start/RouteConfig.cs.
 
 To add another route using a route constraint to the convention based routes, add the code as shown below:
 
@@ -235,8 +239,8 @@ public string GetEmailAttributeRoute(string email)
 
 Here we map the string “Email” to our custom constraint implementation. Now we can use that string in our Route template as “{parametername:Email}”. When using multiple custom constraints you have to map them to unique names to use in your routes. The implementation above maps the url <span class="link-style">http://localhost/Attr/{email}</span> to our method. So now we can use <span class="link-style">http://localhost/Attr/abc@</span> as a valid route but the constaint will ensure that <span class="link-style">http://localhost/Attr/abc</span> will still return a 404 not found.
 
-###  Route constraints in a .Net Framework web application for WebApi controllers
-In the .Net Framework projects, MVC Controllers and WebApi Controllers work with different implementations. When adding a new controller and selecting a WebApi controller template, a WebApiConfig.cs file will appear in the App_Start folder. As you compare that file with the RouteConfig.cs you will see that the methods use different types with different methods to configure routing. 
+###  Route constraints in a .NET Framework web application for WebApi controllers
+In the .NET Framework projects, MVC Controllers and WebApi Controllers work with different implementations. When adding a new controller and selecting a WebApi controller template, a WebApiConfig.cs file will appear in the App_Start folder. As you compare that file with the RouteConfig.cs you will see that the methods use different types with different methods to configure routing. 
 (When adding a WebApi controller to an MVC project you also need add the GlobalConfiguration.Configure(WebApiConfig.Register); line to your global.asax file to enable the WebApi routing)
 
 We can add a WebApi controller to the project and define some routes showing the attribute route constraints with almost the same code as we used for the MVC controller. 
@@ -295,7 +299,7 @@ EmailHttpRouteConstraint.cs:
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Net.Http;
+using System.NET.Http;
 using System.Web.Http.Routing;
 using Utilities;
 
@@ -379,7 +383,7 @@ namespace Framework.WebApiExample.Controllers
 }
 {% endhighlight %}
 
-As you may have noticed in the code above. The email custom route constraint for a WebApi controller implements the IHttpRouteConstraint interface instead of the IRouteConstraint interface. Be aware when intermingling MVC and WebApi controllers in a .Net Framework web application project that other attributes (like authorization) will also usually require different implementations to be used for a MVC and a WebApi controller.
+As you may have noticed in the code above. The email custom route constraint for a WebApi controller implements the IHttpRouteConstraint interface instead of the IRouteConstraint interface. Be aware when intermingling MVC and WebApi controllers in a .NET Framework web application project that other attributes (like authorization) will also usually require different implementations to be used for a MVC and a WebApi controller.
 
 By adding the RoutingApiController listed above the following routes become availlable:
 
@@ -388,10 +392,10 @@ By adding the RoutingApiController listed above the following routes become avai
 - <span class="link-style">http://localhost/api/routingapi/{StringContaining@Symbol}</span>
 
 
-###  Route constraints in a .Net Core web application
+###  Route constraints in a .NET Core web application
 
-In the .Net Core pipeline MVC and WebApi controllers now share the same base classes. The setup for routing is also now centralized in the Startup classes. The code snippets below how to set up the routing and then show an MVC and a WebApi controller with the same routing constraint concepts that I have explained in the previous sections of this post. 
-The code snippets were added to a default .Net Core web application using the Model View Controller project template. The code in the Startup.cs is needed when adding a custom route constraint in the template. If you only use the route constraints that can be resolved by the DefaultInlineConstraintResolver, the code for setting up the RouteOptions configuration can be omitted.
+In the .NET Core pipeline MVC and WebApi controllers now share the same base classes. The setup for routing is also now centralized in the Startup classes. The code snippets below how to set up the routing and then show an MVC and a WebApi controller with the same routing constraint concepts that I have explained in the previous sections of this post. 
+The code snippets were added to a default .NET Core web application using the Model View Controller project template. The code in the Startup.cs is needed when adding a custom route constraint in the template. If you only use the route constraints that can be resolved by the DefaultInlineConstraintResolver, the code for setting up the RouteOptions configuration can be omitted.
 
 Startup.cs 
 {% highlight C# %}
@@ -470,7 +474,7 @@ namespace NetCore.WebApiExample.MiddleWare
 }
 {% endhighlight %}
 
-HomeController.cs (.Net Core MVC Controller)
+HomeController.cs (.NET Core MVC Controller)
 {% highlight C# %}
 using Microsoft.AspNetCore.Mvc;
 
@@ -493,7 +497,7 @@ namespace NetCore.WebApiExample.Controllers
 }
 {% endhighlight %}
 
-RoutingApiController.cs (.Net Core WebApi Controller)
+RoutingApiController.cs (.NET Core WebApi Controller)
 {% highlight C# %}
 using Microsoft.AspNetCore.Mvc;
 
@@ -528,7 +532,7 @@ namespace NetCore.WebApiExample.Controllers
 {% endhighlight %}
 
 ### Testing routing behavior with integration tests
-To ensure your routes work as intended and faulty input does not lead to errors you can write a set of integration tests. I used a .Net Core test project combined with the NUnit testing framework to write the tests shown below.
+To ensure your routes work as intended and faulty input does not lead to errors you can write a set of integration tests. I used a .NET Core test project combined with the NUnit testing framework to write the tests shown below.
 
 TestClass: (the RouteDriver implementation is listed below the TestClass code snippet )
 {% highlight C# %}
@@ -612,8 +616,8 @@ namespace IntegrationTests
 RouteTestDriver.cs (this class is a helper to centralize code used for multiple tests)
 {% highlight C# %} 
 using System;
-using System.Net;
-using System.Net.Http;
+using System.NET;
+using System.NET.Http;
 
 namespace IntegrationTests.TestDriver
 {
@@ -683,5 +687,5 @@ These tests can help you make sure that a route either works (by returning a suc
 - [Microsoft docs page for convention based routing](https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/asp-net-mvc-routing-overview-cs "Microsoft docs page for convention based routing"){:target="_blank"}.
 - [Microsoft docs page for creating a custom route constraint for convention based routing](https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/creating-a-route-constraint-cs "Microsoft docs page for creating a custom route constraint for convention based routing"){:target="_blank"}.
 - [Microsoft docs page for attribute based routing](https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2#adding-route-attributes "Microsoft docs page for attribute based routing"){:target="_blank"}.
-- [Microsoft docs page for routing in .Net Core 2.1](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-2.1 "Microsoft docs page for routing in .Net Core 2.1"){:target="_blank"}.
+- [Microsoft docs page for routing in .NET Core 2.1](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-2.1 "Microsoft docs page for routing in .NET Core 2.1"){:target="_blank"}.
 

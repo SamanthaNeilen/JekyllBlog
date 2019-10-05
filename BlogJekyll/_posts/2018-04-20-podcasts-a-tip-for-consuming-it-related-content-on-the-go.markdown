@@ -6,15 +6,15 @@ date:   2018-04-20 00:00:00 +0100
 <p>
 This month no technical article but a tip I want to share. For written content I usually tend to focus on books and lose track of blogs. With podcasts I can just listen on my work commute or exercise walks. There is a lot of free and actively updated content out there and the podcasts can be listened to from your phone from the different podcast apps out there like <a href="https://www.stitcher.com/" target="_blank">Stitcher</a> for Android or <a href="https://www.apple.com/itunes/" target="_blank">Itunes</a> for Apple devices. 
 </p>
-<h3>.Net/Microsoft specific shows</h3>
+<h3>.NET/Microsoft specific shows</h3>
 <ul>
     <li>
-        <a href="https://www.dotnetrocks.com/" target="_blank"><b>.Net rocks</b></a><p>
-        A show with interviews about .Net subjects. Mostly features interviews with Microsoft employee’s about their projects. Shows come out multiple times in a week and shows are about 45-60 minutes.
+        <a href="https://www.dotnetrocks.com/" target="_blank"><b>.NET rocks</b></a><p>
+        A show with interviews about .NET subjects. Mostly features interviews with Microsoft employee’s about their projects. Shows come out multiple times in a week and shows are about 45-60 minutes.
     </p></li>
     <li>
         <a href="https://msdevshow.com/" target="_blank"><b>MS dev show </b></a><p>
-        A show with interviews about .Net subjects. Mostly features interviews with people about their .Net projects. Shows come out once every week, sometimes they have bigger gaps in their shedule. Shows are about 45-60 minutes long.
+        A show with interviews about .NET subjects. Mostly features interviews with people about their .NET projects. Shows come out once every week, sometimes they have bigger gaps in their shedule. Shows are about 45-60 minutes long.
     </p></li>
     <li>
         <a href="http://www.mergeconflict.fm/" target="_blank"><b>Merge conflict</b></a><p>

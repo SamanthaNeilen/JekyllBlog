@@ -22,7 +22,11 @@ UI testing is a great method of automating regression tests for your application
 <p>
 Please note that all the sample tests later in this blog post are just simple examples to help you get started. If you wish to build an extensive test library please look into building your own UI test framework using the page-object approach.
 </p>
-<h3>Setting up a Code UI project</h3>
+**Table of contents:**
+* Table of Contents
+{:toc}
+
+### Setting up a Code UI project
 <p>
 To start with Coded UI make sure you have the Coded UI project type installed. It can be found under test projects.
 <br/><img src="{{"/assets/images/20180114/VisualStudioTestProjects.png" | relative_url }}" alt="Visual Studio Test Project Templates"/>
@@ -53,7 +57,7 @@ And here is an example of inspecting a button in a web page:
 <br/><img src="{{"/assets/images/20180114/WebButtonProperties.png" | relative_url }}" alt="Web Button Properties"/>
 
  </p>
-  <h3>Setting up a simple WPF test with Coded UI</h3>
+ ### Setting up a simple WPF test with Coded UI
  <p>
  A working sample of the code below including the sample application that it is run on can be found in my <a href="https://github.com/SamanthaNeilen/CodedUITestApplication" target="_blank">CodedUITestApplication repository</a>.
  </p>
@@ -101,7 +105,7 @@ As you can see, you find WPF controls by adding search properties. As long as yo
 <p>
 The framework uses certain timeouts when finding controls. These timeouts can be changed by accessing the static PlayBack class.
 </p>
-<h3>Setting up a simple Windows application test with Coded UI</h3>
+### Setting up a simple Windows application test with Coded UI
 <p>
 In this example I just boot up and automate the windows calculator.
 </p>
@@ -146,7 +150,7 @@ namespace CodedUITestTestApplication.Tests
 <p>
 Notice that the searching and asserting is the same as with the WPF application. Only the base class for defining the type of control is different. 
 </p>
-<h3>Setting up a simple web test with Coded UI</h3>
+### Setting up a simple web test with Coded UI
 <p>
 A webtest is quite similar. Here again the base class for the control is different. Also, we start a BrowserWindow instead of using ApllicationUnderTest. BrowserWindow is actually inherited from ApplicationUnderTest. You can use BrowserWindow.CurrentBrowser (before calling Launch) to determine the browser to use. The default is "IE" and you can use "Chrome" or "Firefox" to start other browsers. Note that Firefox will not start if your browser version is not supported by the  <a href="https://marketplace.visualstudio.com/items?itemName=AtinBansal.SeleniumcomponentsforCodedUICrossBrowserTesting" target="_blank">Selenium Cross Browser tools (version > 47.0.1, 32 bit)</a>.
 </p>
@@ -196,7 +200,7 @@ public class WebTests
     }
 }
 {% endhighlight %}
-<h3>Running a single test on multiple browsers using a data source file</h3>
+### Running a single test on multiple browsers using a data source file
 <p>
 <b>[Edit Feb 16 2018]</b> Note that the solution described below works for projects using the Coded UI framework. When using the default Microsoft Test V2 framework, the use of the TestSettings files is deprecated and your tests will stay undiscoverable in the Test Explorer window. See the <a href="https://github.com/SamanthaNeilen/WebDriverTestApplication" target="">WebDriverTestApplication repository</a> for running tests with the MSTest V2 framework. <b>[End edit Feb 16 2018]</b>
 </p>
@@ -298,7 +302,7 @@ Open the test settings file and navigate to deployment. Check the Enable Deploym
 Sometimes Visual Studio will not automatically pick up the TestSettings file. If you get errors about not finding the data source first check if the TestSettings file is selected for use.
 <br/><img src="{{"/assets/images/20180114/VisualStudioTestSettingsMenu.png" | relative_url }}" alt="Visua Studio Test Settings Menu Option"/>
 </p>
-<h3>Setting up a simple web test with Selenium</h3>
+### Setting up a simple web test with Selenium
 <p>
 <b>[Edit Feb 16 2018]</b> Note that the solution described below works for projects using the Coded UI framework. When using the default Microsoft Test V2 framework, the use of the TestSettings files is deprecated and your tests will stay undiscoverable in the Test Explorer window. See the <a href="https://github.com/SamanthaNeilen/WebDriverTestApplication" target="">WebDriverTestApplication repository</a> for running tests with the MSTest V2 framework. <b>[End edit Feb 16 2018]</b>
 </p>
@@ -389,7 +393,7 @@ namespace CodedUITestTestApplication.Tests
 }
 {% endhighlight %}
 
-<h3>Resources</h3>
+### Resources
 <p>
 <a href="https://app.pluralsight.com/library/courses/codedui-test-automation/table-of-contents" target="_blank">Pluralsight- Coded UI</a><br/>
 <a href="https://app.pluralsight.com/library/courses/selenium/table-of-contents" target="_blank">Pluralsight- Selenium</a><br/>

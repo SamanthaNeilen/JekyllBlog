@@ -12,10 +12,10 @@ I ran into this myself again this week because I used a PowerShell command to ex
 
 If you face the exception “The server forcibly closed the connection” this may be an indication that the ServicePointManager no longer has a compatible protocol to establish a HTTPS connection with the server. 
 
-The ServicePointManager is a static class .Net Framework class that will always choose the highest (securest) protocol available from the SecurityProtocol property and will only fall back to a previous version if the highest is not supported.
+The ServicePointManager is a static class .NET Framework class that will always choose the highest (securest) protocol available from the SecurityProtocol property and will only fall back to a previous version if the highest is not supported.
 
 Use a debugger to inspect the ServicePointManager.SecurityProtocol value to see if TLS 1.2 is listed, to determine whether or not this may be the cause of your connection issues. 
-This is usually the cause when using older .Net Framework versions (< 4.7) as is it was with my PowerShell.
+This is usually the cause when using older .NET Framework versions (< 4.7) as is it was with my PowerShell.
 
 In C# use the code below to append the current security protocols with TLS1.2 before establishing the connection to the server or put this code snippet in your Global.asax startup.  
 
@@ -46,7 +46,7 @@ For more information on this subject visit the reference websites below:
 
 [Wikipedia page for Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security "Wikipedia page for Transport Layer Security"){:target="_blank"}
 
-[Microsoft Docs page on the ServicePointManager.SecurityProtocol property](https://docs.microsoft.com/en-us/dotnet/api/system.net.servicepointmanager.securityprotocol?redirectedfrom=MSDN&view=netframework-4.7.2#System_Net_ServicePointManager_SecurityProtocol "Microsoft Docs page on the ServicePointManager.SecurityProtocol property"){:target="_blank"}
+[Microsoft Docs page on the ServicePointManager.SecurityProtocol property](https://docs.microsoft.com/en-us/dotnet/api/system.NET.servicepointmanager.securityprotocol?redirectedfrom=MSDN&view=netframework-4.7.2#System_Net_ServicePointManager_SecurityProtocol "Microsoft Docs page on the ServicePointManager.SecurityProtocol property"){:target="_blank"}
 
 
 
