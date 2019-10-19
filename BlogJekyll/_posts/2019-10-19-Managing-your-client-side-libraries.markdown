@@ -6,7 +6,7 @@ date:   2019-10-19 00:00:00 +0100
 tags: JavaScript Stylesheets
 ---
 
-If you start a new .NET Core Razor Pages or MVC project in Visual Studio, it will create a project containing working starter website. However, due to the speed at which 3rd party libraries update, the included version of Bootstrap and jQuery will probably be out of date. There will also be an empty site stylesheet and JavaScript file with their nested minified equivalents. These placeholder files will not update their minified counterparts if you don't configuring a minifyer.  In this blogpost I explain the tags used for referencing client-side libraries, how to use LibMan for 3rd party client-side libraries and how to use BuildBindlerMinifier to bundle and minify files in your project. 
+If you start a new .NET Core Razor Pages or MVC project in Visual Studio, it will create a project containing working starter website. However, due to the speed at which 3rd party libraries update, the included version of Bootstrap and jQuery will probably be out of date. There will also be an empty site stylesheet and JavaScript file with their nested minified equivalents. These placeholder files will not update their minified counterparts if you don't configuring a minifyer.  In this blogpost I explain the tags used for referencing client-side libraries, how to use LibMan for 3rd party client-side libraries and how to use BuildBundlerMinifier to bundle and minify files in your project. 
 
 
 **Table of contents:**
