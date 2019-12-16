@@ -4,9 +4,9 @@ title:  "Tips for making your code more suitable for unit testing"
 date:   2017-12-29 00:00:00 +0100
 tags: TestAutomation
 ---
-
+<p>
 Unit tests are important to test your business logic. Unit tests should not call actual services or the database and they should be able to run within a few minutes.
-In this blogpost I want to give a few tips on how to make your codebase more suitable for writing unit tests.
+In this blog post, I want to give a few tips on how to make your codebase more suitable for writing unit tests.
 </p>
 **Table of contents:**
 * Table of Contents
@@ -105,17 +105,17 @@ Now you can create a unit test to the GetCustomerOverview method. I will describ
 If you are not using Entity Framework Code First but using the database designer, you must create a separate partial class of your DbContext and set the interface inheritance in the new custom partial class. If you add an interface in the generated file, it will be lost at the next code generation from the model.
 </p>
 <p>
-Making sure that all dependencies are passed to a class via the constructor is called dependency injection. To ensure that you do not have to new up all the dependencies in the constructors in the UI or other top layer of your application you can leverage a framework like <a href="https://msdn.microsoft.com/en-us/library/dn178463(v=pandp.30).aspx" target="_blank">Unity</a> to handle all the dependency injection for you. An example of this can be found in my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="_blank">ECommerceSampleApplication repository</a> in the ECommerceApp.NETFramework.Web project. The Unity NuGet packages combined with a unity configuration file section map all the interfaces with the concrete implementations. .NET Core has a built in dependency injection framework.
+Making sure that all dependencies are passed to a class via the constructor is called dependency injection. To ensure that you do not have to new up all the dependencies in the constructors in the UI or a different top layer of your application you can leverage a framework like <a href="https://msdn.microsoft.com/en-us/library/dn178463(v=pandp.30).aspx" target="_blank">Unity</a> to handle all the dependency injection for you. An example of this can be found in my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="_blank">ECommerceSampleApplication repository</a> in the ECommerceApp.NETFramework.Web project. The Unity NuGet packages combined with a unity configuration file section map all the interfaces with the concrete implementations. .NET Core has a built-in dependency injection framework.
 </p>
 <p>
 When writing tests you will want to call only specific calls of an interface during a test. You can use a mocking framework like Moq to create and verify fake behavior on interface calls. More information and examples of Moq can be found <a target="_blank" href="https://github.com/Moq/moq4/wiki/Quickstart">here</a>.
 </p>
 ### Mocking Entity Framework
 <p>
-When using Entity Framwork 6 and onward you can use the mock implementation in <a href="https://msdn.microsoft.com/en-us/library/dn314431(v=vs.113).aspx" target="_blank">this MSDN post</a> to simulate an entity framework without having to use a mocking framework to mock out all the calls.
+When using Entity Framework 6 and onward you can use the mock implementation in <a href="https://msdn.microsoft.com/en-us/library/dn314431(v=vs.113).aspx" target="_blank">this MSDN post</a> to simulate an entity framework without having to use a mocking framework to mock out all the calls.
 </p>
 <p>
-An example of a testclass, using the mock framework and the refactored GetCustomerOverview method of the previous section, would look like the code snippet below (This test class uses <a href="https://github.com/nunit/docs/wiki/NUnit-Documentation" target="_blank">the NUnit framework</a> for writing and running the tests):
+An example of a test class, using the mock framework and the refactored GetCustomerOverview method of the previous section, would look like the code snippet below (This test class uses <a href="https://github.com/nunit/docs/wiki/NUnit-Documentation" target="_blank">the NUnit framework</a> for writing and running the tests):
 </p>
 {% highlight c# %}
 public class CustomerServiceTests
@@ -283,10 +283,10 @@ public interface IZipEntry
 }
 {% endhighlight %}
 <p>
-Notice that in the adapters above that I only implemented and extracted the interfaces that I actually use. It is not necessary to extract all the functionality of the third party code if you never call it. 
+Notice that in the adapters above that I only implemented and extracted the interfaces that I actually use. It is not necessary to extract all the functionality of the third-party code if you never call it. 
 </p>
 <p>
-Now that I have interfaces for all my ExportService dependencies I can refactor my ExportService class and write the appropriate unittest for the public CreateCustomerOverviewZipFile method.
+Now that I have interfaces for all my ExportService dependencies I can refactor my ExportService class and write the appropriate unit test for the public CreateCustomerOverviewZipFile method.
 </p>
 {% highlight c# %}
 public class ExportService

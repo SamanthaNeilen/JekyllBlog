@@ -5,7 +5,7 @@ date:   2017-11-24 00:00:00 +0100
 tags: VisualStudio SQLServer
 ---
 <p>
-	When building an application I also want to manage changes to the database from source control. One of the ways of doing this is with a Visual Studio SQL Server Database project. It integrates well with source control and can be integrated in automatic deployments.
+	When building an application I also want to manage changes to the database from source control. One of the ways of doing this is with a Visual Studio SQL Server Database project. It integrates well with source control and can be integrated into automatic deployments.
 </p>
 <p>
 	All screenshots and used techniques that are written in this post are available within Visual Studio 2017 community edition and SQL Server 2017 express edition that are both free downloads.
@@ -19,8 +19,8 @@ tags: VisualStudio SQLServer
 	<img src="{{"/assets/images/20171124/EmptyDatabaseProjectSolution.png" | relative_url }}" alt="Empty Database Project Solution Explorer"/>
 </p>
 <p>
-	You can now start to adding new items like tables, views, stored procedures and all kinds of other SQL Server database objects. A good practice is to put these objects into folders representing the different database objects for better maintainability.
-	You can also import objects from an existing database by right clicking on the project and select Import from the available options ( the import database and dacpac options are only available when the database project is still empty).
+	You can now start adding new items like tables, views, stored procedures and all kinds of other SQL Server database objects. A good practice is to put these objects into folders representing the different database objects for better maintainability.
+	You can also import objects from an existing database by right-clicking on the project and select Import from the available options ( the import database and dacpac options are only available when the database project is still empty).
 </p> 
 <p>
 	When creating an object like a table, Visual Studio will show an editor as shown in the image below. You can leverage the designer combined with the properties window to define fields and column settings or just type in the SQL statements in the T-SQL window on the lower left side.
@@ -44,7 +44,7 @@ tags: VisualStudio SQLServer
 	<img src="{{"/assets/images/20171124/SchemaCompareUpdateSuccesful.png" | relative_url }}" alt="Schema Compare Update Succesful"/>
 </p>
 <p>
-	When the update fails, when you for example add a new non nullable column without a default value or deleting a column with data, the results will show like below:<br/>
+	When the update fails, for example when you add a new non-nullable column without a default value or deleting a column with data, the results will show like below:<br/>
 	<img src="{{"/assets/images/20171124/SchemaCompareUpdateFailed.png" | relative_url }}" alt="Schema Compare Update Failed"/>
 </p>
 <p>
@@ -56,7 +56,7 @@ tags: VisualStudio SQLServer
 	<img src="{{"/assets/images/20171124/SchemaCompareOptions.png" | relative_url }}" alt="Schema Compare Options"/>
 </p>
 <p>
-	In my case I had a faulty existing Countr column that did not match a newly created Country column. To get schema compare to update my database I had to created a data migration pre-upgrade script as shown below.
+	In my case, I had a faulty existing Countr column that did not match a newly created Country column. To get Schema Compare to update the database I had to create a data migration pre-upgrade script as shown below.
 </p>
 {% highlight sql %}
 IF EXISTS(SELECT 1 FROM sys.columns WHERE Name = N'Countr' AND Object_ID = Object_ID(N'dbo.Customer'))
@@ -79,12 +79,12 @@ END
 	<img src="{{"/assets/images/20171124/ProjectPropertyPages.png" | relative_url }}" alt="Project Property Pages"/>
 </p>
 <p>
-	Once all known instances of the database are updated with the specific Pre-Deployment script. It can be removed to avoid clutter of the project. 
+	Once all known instances of the database are updated with the specific Pre-Deployment script. It can be removed to avoid any clutter of the project. 
 	The specific IF statement will ensure that the statements are only run on a database that can do the specific data migration and skips it when creating a completely new instance.
 </p>
 <p>
-	These projects are really only for managing schema information not data. If you want to secure your data, you need to create regular (scheduled) backups of your database. 
-	We can use Post-Deployment scripts to add seed data to tables when they are empty. An example is show below:
+	These projects are really only for managing schema information, not data. If you want to secure your data, you need to create regular (scheduled) backups of your database. 
+	We can use Post-Deployment scripts to add seed data to tables when they are empty. An example is shown below:
 </p>
 {% highlight sql %}
 IF NOT EXISTS(SELECT TOP(1) [Name] FROM Customer)
@@ -102,8 +102,8 @@ END
 	If you have any manual scripts, that you might want to run periodicly, store them with the solution in a seperate solution items folder so they will not be compiled into the project output.
 </p>
 <p>
-	The dacpac files that are the output of the project can be used by an automated or manual deployment process to change the databases in your environments. Once you update the database, it will remember the version of the dacpac used to update the database. The project has a refactorlog file reflecting all changes made in a sequential form. Once  a dacpac version has been applied with the changes and you want to run the dacpac again after making manual modifications to the database, it will not be able to restore properly to the intended database state .This is why during development you will usually be using the Schema Compare functionality and running 
-	Pre- and Post-Deployment scripts manually untill all changes are ready and the dacpac reflecting the next sequential update will be pushed out to your testing and eventualy production environments.
+	The dacpac files that are the output of the project can be used by an automated or manual deployment process to change the databases in your environments. Once you update the database, it will remember the version of the dacpac used to update the database. The project has a refactor log file reflecting all changes made in a sequential form. Once  a dacpac version has been applied with the changes and you want to run the dacpac again after making manual modifications to the database, it will not be able to restore properly to the intended database state. This is why during development you will usually be using the Schema Compare functionality and running 
+	Pre- and Post-Deployment scripts manually until all changes are ready and the dacpac reflecting the next sequential update will be pushed out to your testing and eventually production environments.
 </p>
 <p>
 	If you have a dacpac file you can deploy it in manually in SQL Server Management Studio with the option below for a new database:<br/>
@@ -114,7 +114,7 @@ END
 	<img src="{{"/assets/images/20171124/ManagementStudioUpgrade.png" | relative_url }}" alt="SQL Management Studio Upgrade"/>
 </p>
 <p>
-	If you are using VSTS for authomatic deployments, you can add a step to deploy dacpac files.
+	If you are using VSTS for automatic deployments, you can add a step to deploy dacpac files.
 </p>
 <p>
 	Below are some references to documentation about the topics discussed in this post:<br/>
