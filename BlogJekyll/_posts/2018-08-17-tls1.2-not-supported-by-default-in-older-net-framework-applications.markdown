@@ -4,13 +4,13 @@ title:  "TLS1.2 not supported by default in older .NET Framework applications"
 date:   2018-08-17 00:00:00 +0100
 tags: 
 ---
-Lately more and more API providers have been disabling TLS 1.1 for their servers and are currently only accepting the TLS 1.2 protocol for establishing a HTTPS connection to their servers. TLS takes care of the encryption of the HTTPS communication and TLS1.2 was introduced in 2008. It is more secure (harder to decrypt) than the previous versions.
+Lately, more and more API providers have been disabling TLS 1.1 for their servers and are currently only accepting the TLS 1.2 protocol for establishing an HTTPS connection to their servers. TLS takes care of the encryption of the HTTPS communication and TLS1.2 was introduced in 2008. It is more secure (harder to decrypt) than the previous versions.
 
-You may encounter that establishing a HTTPS connection to a 3rd party may suddenly fail without there having been any new code changes or deployments. This may be due to the fact that the 3rd party has decided to no longer accept TLS 1.1 or below for HTTPS connections. 
+You may encounter that establishing an HTTPS connection to a 3rd party may suddenly fail without there having been any new code changes or deployments. This may be due to the fact that the 3rd party has decided to no longer accept TLS 1.1 or below for HTTPS connections. 
 
-I ran into this myself again this week because I used a PowerShell command to execute C# code to retrieve a bearer access token from Azure leveraging the ADAL dll’s. It suddenly did not work anymore last week and after some Googling I found a similar error that was solved by adding the TLS1.2 protocol to the ServicePointManager.SecurityProtocol property. I have needed to do this before in several older C# applications and it inspired me to write this blogpost today.
+I ran into this myself again this week because I used a PowerShell command to execute C# code to retrieve a bearer access token from Azure leveraging the ADAL DLLs. It suddenly did not work anymore last week and after some Googling, I found a similar error that was solved by adding the TLS1.2 protocol to the ServicePointManager.SecurityProtocol property. I have needed to do this before in several older C# applications and it inspired me to write this blog post today.
 
-If you face the exception “The server forcibly closed the connection” this may be an indication that the ServicePointManager no longer has a compatible protocol to establish a HTTPS connection with the server. 
+If you face the exception “The server forcibly closed the connection” this may be an indication that the ServicePointManager no longer has a compatible protocol to establish an HTTPS connection with the server. 
 
 The ServicePointManager is a static class .NET Framework class that will always choose the highest (securest) protocol available from the SecurityProtocol property and will only fall back to a previous version if the highest is not supported.
 
@@ -26,7 +26,7 @@ In C# use the code below to append the current security protocols with TLS1.2 be
 
 When using powershell use the command below to check the current default protocols as used in Powershell:
 {% highlight PowerShell %}
- [Net.ServicePointManager]::SecurityProtocol
+[Net.ServicePointManager]::SecurityProtocol
 {% endhighlight %}
 
 You can set the TLS1.2 protocol if it’s not listed by using: 
@@ -53,4 +53,4 @@ For more information on this subject visit the reference websites below:
 
 
 
- 
+

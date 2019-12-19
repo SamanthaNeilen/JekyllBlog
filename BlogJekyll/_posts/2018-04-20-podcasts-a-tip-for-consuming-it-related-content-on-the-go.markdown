@@ -1,20 +1,20 @@
 ﻿---
 layout: post
-title:  "Podcasts, a tip for consuming IT related content on the go"
+title:  "Podcasts, a tip for consuming IT-related content on the go"
 date:   2018-04-20 00:00:00 +0100
 ---
 <p>
-This month no technical article but a tip I want to share. For written content I usually tend to focus on books and lose track of blogs. With podcasts I can just listen on my work commute or exercise walks. There is a lot of free and actively updated content out there and the podcasts can be listened to from your phone from the different podcast apps out there like <a href="https://www.stitcher.com/" target="_blank">Stitcher</a> for Android or <a href="https://www.apple.com/itunes/" target="_blank">Itunes</a> for Apple devices. 
+This month no technical article but a tip I want to share. For written content, I usually tend to focus on books and lose track of blogs. With podcasts, I can just listen on my commute or exercise walks. There is a lot of free and actively updated content out there and the podcasts can be listened to from your phone from the different podcast apps out there like <a href="https://www.stitcher.com/" target="_blank">Stitcher</a> for Android or <a href="https://www.apple.com/itunes/" target="_blank">Itunes</a> for Apple devices. 
 </p>
 <h3>.NET/Microsoft specific shows</h3>
 <ul>
     <li>
         <a href="https://www.dotnetrocks.com/" target="_blank"><b>.NET rocks</b></a><p>
-        A show with interviews about .NET subjects. Mostly features interviews with Microsoft employee’s about their projects. Shows come out multiple times in a week and shows are about 45-60 minutes.
+        A show with interviews about .NET subjects. It mostly features interviews about .NET and Microsoft projects and subjects. Shows come out multiple times in a week and shows are about 45-60 minutes.
     </p></li>
     <li>
         <a href="https://msdevshow.com/" target="_blank"><b>MS dev show </b></a><p>
-        A show with interviews about .NET subjects. Mostly features interviews with people about their .NET projects. Shows come out once every week, sometimes they have bigger gaps in their shedule. Shows are about 45-60 minutes long.
+        A show with interviews about .NET subjects. It mostly features interviews with people about their .NET projects. Shows come out once every week, sometimes they have bigger gaps in their schedule. Shows are about 45-60 minutes long.
     </p></li>
     <li>
         <a href="http://www.mergeconflict.fm/" target="_blank"><b>Merge conflict</b></a><p>
@@ -22,7 +22,7 @@ This month no technical article but a tip I want to share. For written content I
     </p></li>
     <li>
         <a href="https://www.microsoft.com/en-us/research/blog/category/podcast/" target="_blank"><b>Microsoft research podcast</b></a><p>
-        Interview with employees at Microsoft research about their project. This podcast is less developer focused and features a variety of subjects researched at Microsoft. Shows come out every week and are about 30 minutes long.
+        Interviews with employees at Microsoft research about their project. This podcast is less developer-focused and features a variety of subjects researched at Microsoft. Shows come out every week and are about 30 minutes long.
     </p></li>   
 </ul>
 <h3>General IT shows</h3>
@@ -33,7 +33,7 @@ This month no technical article but a tip I want to share. For written content I
     </p></li>
     <li>
         <a href="http://developeronfire.com/" target="_blank"><b>Developer on fire</b></a><p>
-        Interviews with developers, follows a pattern of personal stories about their failures, successes, book recommendations and tips for other developers. Shows come out once or twice a week and are about 45 minutes long.
+        Interviews with developers. It follows a pattern of personal stories about their failures, successes, book recommendations and tips for other developers. Shows come out once or twice a week and are about 45 minutes long.
     </p></li>
     <li>
         <a href="https://www.hanselminutes.com/" target="_blank"><b>Hanselminutes</b></a><p>
@@ -53,7 +53,7 @@ This month no technical article but a tip I want to share. For written content I
     </p></li>
     <li>
         <a href="https://securityweekly.com/" target="_blank"><b>Paul’s security weekly</b></a><p>
-        Discussions and interviews about security. The podcasts features numerous shows that zoom in on the various IT fields. Application Security weekly focusses on the developer side of things. This show also has a version with video, sometimes the interviews are demos and are not easily followed with audio only. Features multiple themed shows a week that are about 60-120 minutes long.
+        Discussions and interviews about security. The podcasts feature numerous shows that zoom in on the various IT fields. Application Security weekly focusses on the developer side of things. This show also has a version with video, sometimes the interviews are demos and are not easily followed with audio-only. Features multiple themed shows a week which are about 60-120 minutes long.
     </p></li>
     <li>
         <a href="https://softwareengineeringdaily.com/" target="_blank"><b>Software engineering daily</b></a><p>
@@ -73,7 +73,7 @@ This month no technical article but a tip I want to share. For written content I
     </p></li>
     <li>
         <a href="https://spec.fm/podcasts/developer-tea" target="_blank"><b>Developer tea</b></a><p>
-        A show about taking on a learning mindset and developing you soft skills. Comes out 3 times a week and shows are about 20-30 minutes long. 
+        A show about taking on a learning mindset and developing your soft skills. It comes out 3 times a week and shows are about 20-30 minutes long.
     </p></li>
     <li>
         <a href="http://www.weeklydevtips.com/" target="_blank"><b>Weekly dev tips</b></a><p>
@@ -88,7 +88,7 @@ This month no technical article but a tip I want to share. For written content I
 <ul>
     <li>
         <a href="https://scrum-master-toolbox.org/" target="_blank"><b>Scrum master toolbox</b></a><p>
-        Interviews with scrum masters about their experiences. Features a set schedule of “theme-days” covering successes, failures, book recommendations, retro format recommendations. Shows come out every businessday and are about 10-20 minutes long.
+        Interviews with scrum masters about their experiences. Features a set schedule of “theme-days” covering successes, failures, book recommendations, retro format recommendations. Shows come out every business day and are about 10-20 minutes long.
     </p></li>
     <li>
         <a href="https://ryanripley.com/agile-for-humans/" target="_blank"><b>Agile for humans</b></a><p>

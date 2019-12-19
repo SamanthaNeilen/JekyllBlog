@@ -5,23 +5,23 @@ date:   2018-02-10 00:00:00 +0100
 tags: DevOps
 ---
 <p>
-VSTS is the online platform from Microsoft to save your code. A VSTS project is free when there are 5 users or less and can function as a free private source control for small teams and projects. It also has Scrum/Kanban board functionality to manage a backlog and issues. But the best feature might be that you can use the  build and deployment features to fully adopt a DevOps way of working.  In this blogpost I will be showing how to create and run a build using VSTS. In a next blog post I will cover how to set up a deployment to Azure using the output of the build.
+VSTS is the online platform from Microsoft to save your code. A VSTS project is free when there are 5 users or less and can function as free private source-control for small teams and projects. It also has Scrum/Kanban board functionality to manage a backlog and issues. But the best feature might be that you can use the build and deployment features to fully adopt a DevOps way of working. In this blog post, I will be showing how to create and run a build using VSTS. In the next blog post, I will cover how to set up a deployment to Azure using the output of the build.
 </p>
 <p>
 Even if you are not using a build for creating deployments, they still ensure that the source repository does not only build on your machine. It can also run your unit tests for you if you forget to run them yourself. 
 </p>
 <p>
-In the past you always needed to set up a server or workstation with a build agent installed to set up builds, but I recently learned that there are Hosted Agents that actually spin up a build agent for you in the cloud and publish the build output (deployment assets) to an output folder. You can then use the deployment pipelines to deploy these assets to Azure or a server. To see what builds are supported by the Hosted Agent see the <a href="https://docs.microsoft.com/en-us/vsts/build-release/concepts/agents/hosted" target="_blank">Microsoft Docs page</a>. 
+In the past, you always needed to set up a server or workstation with a build agent installed to set up builds, but I recently learned that there are Hosted Agents that actually spin up a build agent for you in the cloud and publish the build output (deployment assets) to an output folder. You can then use the deployment pipelines to deploy these assets to Azure or a server. To see what builds are supported by the Hosted Agent see the <a href="https://docs.microsoft.com/en-us/vsts/build-release/concepts/agents/hosted" target="_blank">Microsoft Docs page</a>. 
 <p>
 To set up a VSTS project visit <a href="https://www.visualstudio.com/team-services" target="_blank">https://www.visualstudio.com/team-services/</a>. You can create builds for other source control providers like GitHub so you can create a build but will not have to migrate your source control and lose any check-in history.
 </p>
 <p>
 <h3>Setting up a build</h3>
 <p>
-In this example I will be setting up a build for my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="blank">ECommerceSampleApplication repository</a> that is hosted on GitHub. It contains a .NET Framework 4.6.1 MVC application, a supporting database project and some unit tests.
+In this example, I will be setting up a build for my <a href="https://github.com/SamanthaNeilen/ECommerceSampleApplication" target="blank">ECommerceSampleApplication repository</a> that is hosted on GitHub. It contains a .NET Framework 4.6.1 MVC application, a supporting database project and some unit tests.
 </p>
 <p>
-First go to your team project. Go to the builds section under Build and Release. Then click the New button to start a new build definition.
+First, go to your team project. Go to the builds section under Build and Release. Then click the New button to start a new build definition.
 <br/><img src="{{"/assets/images/20180210/CreateNewBuildDefinition.png" | relative_url }}" alt="Create New Build Definition"/>
 </p> 
 <p>
@@ -33,31 +33,31 @@ After clicking continue you get the option of selecting a specific build templat
 <br/><img src="{{"/assets/images/20180210/SelectBuildTemplate.png" | relative_url }}" alt="Select A Build Template"/>
 </p>
 <p>
-I chose the ASP.NET project template. It gets my sources, restores my NuGet packages, builds the solution, runs the unittests, sets up publishing of the pdb files for remote debugging and publishes the build artifacts (project output) to the VSTS deployment/download location. 
+I chose the ASP.NET project template. It gets my sources, restores my NuGet packages, builds the solution, runs the unit tests, sets up the publishing of the PDB files for remote debugging and publishes the build artifacts (project output) to the VSTS deployment/download location.
 <br/><img src="{{"/assets/images/20180210/BuildSolutionStepDefaults.png" | relative_url }}" alt="Build Solution Step Defaults"/>
 </p>
 <p>
-I can actually just use most of the defaults for my project. I don’t need the publish symbol paths task so I deleted it. In the Build Solution Task, note the input field for Platform and Configuration. These variables will be populated with values from the Variables tab. In this task also notice the MSBuild arguments. This configuration will output the deployment package for my web package to the artifact staging directory. Seeing as my MVC project is not only the project I wanted to build and deploy, I removed everything in the MSBuild Arguments except the /p DeployOnBuild=true argument. 
+I can actually just use most of the defaults for my project. I don’t need the publish symbol paths task so I deleted it. In the Build Solution Task, note the input field for Platform and Configuration. These variables will be populated with values from the Variables tab. Also, notice the MSBuild arguments. This configuration will output the deployment package for my web package to the artifact staging directory. Seeing as my MVC project is not only the project I wanted to build and deploy, I removed everything in the MSBuild Arguments except the /p DeployOnBuild=true argument.
 <br/><img src="{{"/assets/images/20180210/BuildSolutionStepAfterChanges.png" | relative_url }}" alt="Build Solution Step After Changes"/>
 </p> 
 <p>
-Next I added 2 custom steps to copy the deployment files from the website and database projects. The Copy tasks are shown in the images below.  (All advanced and control options settings were not changed from the defaults)
+Next, I added 2 custom steps to copy the deployment files from the website and database projects. The Copy tasks are shown in the images below.  (All advanced and control options settings were not changed from the defaults)
 <br/><img src="{{"/assets/images/20180210/CopyWebFilesTask.png" | relative_url }}" alt="Copy Web Files Task"/>
 <br/><img src="{{"/assets/images/20180210/CopyDatabaseFilesTask.png" | relative_url }}" alt="Copy Database Files Task"/>
 </p>
 <p>
-If you have tests in your solution that run as integration tests and cannot and connect to resources like the database or a webservice from the test run process, you could choose exclude them in the Test Assemblies task via the Test filter criteria box. 
+If you have tests in your solution which run as integration tests and cannot and connect to resources like the database or web service from the test run process, you could choose to exclude them in the Test Assemblies task via the Test filter criteria box.
 <br/><img src="{{"/assets/images/20180210/TestFilterAttribute.png" | relative_url }}" alt="Test Filter Attribute Field"/>
 </p>
 <p> 
 Most input fields in the tasks have an information icon to figure out how the fields are used. Also again look at <a href="https://docs.microsoft.com/en-us/vsts/build-release/" target="_blank">https://docs.microsoft.com/en-us/vsts/build-release/</a> for more guidance on specific needs.
 </p>
 <p>
-Also check out the settings under the other tabs of the build. 
+Also, check out the settings under the other tabs of the build. 
 <br/><img src="{{"/assets/images/20180210/BuildTemplateTabsMenu.png" | relative_url }}" alt="Build Template Tabs Menu"/>
 </p>
 <p>
-- Triggers allow you to configure whether or not to use gated checkins or trigger the build on a checkin or to schedule the build as a nightly or other scheduled build. <br/>
+- Triggers allow you to configure whether or not to use gated check-ins or trigger the build on check-in or to schedule the build as a nightly or another type of build. <br/>
 - The Options tab allows you to configure the name and versioning of the build output. <br/>
 - Retention specifies how long the assets will be maintained. <br/>
 - History will contain references to builds for this template if you have already triggered the build template before.
@@ -67,14 +67,14 @@ Now that you have a build template you can save or save and queue. The save and 
 <br/><img src="{{"/assets/images/20180210/SaveAndQueueDialog.png" | relative_url }}" alt="Save And Queue Dialog"/>
 </p>
 <p>
-Here you can see the Agent Queue and you can select the hosted queues provided by VSTS or any private build agents that you have configured. Also note the variables, you can change their values here. If you have set up an additional variable in the Variables tab of the build template and you want to set the value at every build, then be sure to check the "Settable on queue time" option
+Here you can see the Agent Queue and you can select the hosted queues provided by VSTS or any private build agents that you have configured. Also, note the variables, you can change their values here. If you have set up an additional variable in the Variables tab of the build template and you want to set the value at every build, then be sure to check the "Settable on queue time" option
 </p>
 <p>
 After the build has been queued you can see the status under the build tab. Click on the version number link to see the progress and details for a build.
 <br/><img src="{{"/assets/images/20180210/BuildsOverview.png" | relative_url }}" alt="Builds Overview"/>
 </p> 
 <p>
-If you are running private agents or multiple builds you might sometimes see the Status as waiting for available agent. If this happens you can check out the agents workload under the Gear icon under the Agent Queue option. You need certain account permissions on the project to access this information and it may not be visible if you do not have permission.
+If you are running private agents or multiple builds you might sometimes see the Status as waiting for an available agent. If this happens you can check out the workload under the Gear icon under the Agent Queue option. You need certain account permissions on the project to access this information and it may not be visible if you do not have permission.
 <br/><img src="{{"/assets/images/20180210/AgentQueueOverview.png" | relative_url }}" alt="Agent Queue Overview"/>
 </p>
 <p>
