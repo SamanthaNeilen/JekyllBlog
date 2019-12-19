@@ -6,11 +6,11 @@ date:   2019-03-16 00:00:00 +0100
 tags: WebAPI, Mvc
 ---
 
-When developing enterprise applications on the internet you want to limit access to authenticated users only. In this blogpost I will provide links to some guides to help you get started with implementing secured websites and API using Azure Active Directory.
+When developing enterprise applications on the internet you want to limit access to authenticated users only. In this blog post, I will provide links to some guides to help you get started with implementing secured websites and API using Azure Active Directory.
 
 For more information on how the authentication methods provided by Azure Active Directory see the [Microsoft Docs pages for Azure Active Directory authentication.](https://docs.microsoft.com/en-us/azure/active-directory/develop/authentication-scenarios)
 
-Also a great comprehensive resource around Azure Active Directory security is the ["Azure Active Directory for Developers" Pluralsight course](https://app.pluralsight.com/library/courses/azure-active-directory-developers/table-of-contents).
+Also, a great comprehensive resource around Azure Active Directory security is the ["Azure Active Directory for Developers" Pluralsight course](https://app.pluralsight.com/library/courses/azure-active-directory-developers/table-of-contents).
 
 **Table of contents:**
 * Table of Contents
@@ -20,7 +20,7 @@ Also a great comprehensive resource around Azure Active Directory security is th
 
 When using Azure Active Directory for a user, the actual authentication process will happen outside of your application via the [OpenID Connect authentication scheme](https://openid.NET/connect/). When an unauthenticated user uses a browser to navigate to your application, the middleware code will redirect the user to a Microsoft hosted login page. When the user provides the correct credentials, the login page will redirect the authenticated user back to a specified redirect URL in your application.
 
-There are already great guides and sample application from Microsoft on how to get started with Azure Active Directory in your web applications.
+There are already great guides and sample applications from Microsoft on how to get started with Azure Active Directory in your web applications.
 
 For a guide on setting up OpenID Connect authentication for a .NET Framework application see the  ["Add sign-in with Microsoft to an ASP.NET web app" guide on the Microsoft Docs pages.](https://docs.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-asp-webapp ) or the ["Integrate Azure AD into a web application using OpenID Connect" Azure examples article.](https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-openidconnect/)
 
@@ -30,9 +30,9 @@ When using UI tests on a website that is secured with OpenID Connect you will al
 
 ### Azure Active Directory security between applications (Bearer token authentication) 
 
-When another applications requests or posts data to your API, you will want to make sure that the API facing the public internet is secured so that only no unauthorized parties can use the API.
+When other applications request or post data to your API, you will want to make sure that the API facing the public internet is secured so that only no unauthorized parties can use the API.
 
-This security mechanism can leverage the Azure Active Directory via so called [access token](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens). The requesting party can request a token and send it in the Authorization header of the request to the API. The API application can verify the validity of the token against Azure Active Directory. If a token is valid the API can process the request and can use the caller identity and claims from the token available for further authorization logic.
+This security mechanism can leverage the Azure Active Directory via a so-called [access token](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens). The requesting party can request a token and send it in the Authorization header of the request to the API. The API application can verify the validity of the token against Azure Active Directory. If a token is valid the API can process the request and can use the caller identity and claims from the token available for further authorization logic.
 
 For a guide on setting up bearer token authentication for a .NET Framework API application see the ["Build a .NET web API that integrates with Azure AD for authentication and authorization" quickstart on the Microsoft Docs pages.](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v1-dotnet-webapi)
 
@@ -46,7 +46,7 @@ For a guide on requesting a client credential flow token using ADAL see the ["cl
 
 For a guide on requesting a client credential flow token using MSAL see the ["client credential flow" Github wiki page](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Client-credential-flows).
 
-If the client application is a non .NET application, it can request a token for the client application using the OAuth endpoints of Azure Active Directory via HTTP posts. See [the Microsoft docs pages for the HTTP requests to request an access token for an application](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-client-creds-grant-flow#service-to-service-access-token-request).
+If the client application is a non-.NET application, it can request a token for the client application using the OAuth endpoints of Azure Active Directory via HTTP posts. See [the Microsoft docs pages for the HTTP requests to request an access token for an application](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-client-creds-grant-flow#service-to-service-access-token-request).
 
 For testing an API with automated tests you can request a bearer token for the API with the same code as a client application and include the token in the Authorization header when calling the API under test.
 
@@ -67,7 +67,7 @@ public class FilterConfig
     }
 }
 ```
-The Authorize attributes for MVC and API Controllers reside in a different namespaces. If you decorate and API controller with the Authorize attribute for a MVC controller, the Authorize attribute will not be triggered. The MVC authorize attribute uses the "System.Web.Mvc" namespace. The API authorize attribute uses the "System.Web.Http" namespace.
+The Authorize attributes for MVC and API Controllers reside in different namespaces. If you decorate and API controller with the Authorize attribute for an MVC controller, the Authorize attribute will not be triggered. The MVC Authorize attribute uses the "System.Web.Mvc" namespace. The API authorize attribute uses the "System.Web.Http" namespace.
 
 If you have a project with both MVC and Web API controllers. You may want to configure the default OWIN Authentication pipeline to accept both OpenIDConnect and JwtBearerTokens but have certain API Controllers only use the JwtBearerToken authentication. You can deviate from the default OWIN Configuration by using the HostAuthenticationAttribute (System.Web.Http) on a controller or the SuppressHostPrincipal in the App_Start\WebApiConfig.cs file. You will need to install the NuGet package: "Microsoft.AspNet.WebApi.Owin" to access the classes.
 
@@ -88,7 +88,7 @@ public class MyApiController
 
 To enable a global filters for all API and MVC controllers in .NET Core  you can use a Convention to set up an AuthorizationFilter on all controllers.
 
-To implement the Convention, first add a new IControllerModelConvention implementation that will set the authorization policy for the controller. You could add extra conditional logic to not set the policy under certain conditions.
+To implement the Convention, first, add a new IControllerModelConvention implementation that will set the authorization policy for the controller. You could add extra conditional logic to not set the policy under certain conditions.
 
 ```
 using Microsoft.AspNetCore.Authorization;

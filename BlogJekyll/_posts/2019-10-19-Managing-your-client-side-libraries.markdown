@@ -6,7 +6,7 @@ date:   2019-10-19 00:00:00 +0100
 tags: JavaScript Stylesheets
 ---
 
-If you start a new .NET Core Razor Pages or MVC project in Visual Studio, it will create a project containing working starter website. However, due to the speed at which 3rd party libraries update, the included version of Bootstrap and jQuery will probably be out of date. There will also be an empty site stylesheet and JavaScript file with their nested minified equivalents. These placeholder files will not update their minified counterparts if you don't configuring a minifyer.  In this blogpost I explain the tags used for referencing client-side libraries, how to use LibMan for 3rd party client-side libraries and how to use BuildBundlerMinifier to bundle and minify files in your project. 
+If you start a new .NET Core Razor Pages or MVC project in Visual Studio, it will create a project containing a working starter website. However, due to the speed at which 3rd party libraries update, the included version of Bootstrap and jQuery will probably be out of date. There will also be an empty site stylesheet and JavaScript file with their nested minified equivalents. These placeholder files will not update their minified counterparts if you don't configure a minifyer.  In this blog post, I explain the tags used for referencing client-side libraries, how to use LibMan for 3rd party client-side libraries and how to use BuildBundlerMinifier to bundle and minify files in your project. 
 
 
 **Table of contents:**
@@ -59,21 +59,21 @@ If you start a new .NET Core Razor Pages or MVC project in Visual Studio, it wil
 </html>
 ```
 
-Notice the environment elements. When using the development environment, the local unminified files are used. For all other environments it uses a CDN (content delivery network) link to a minified file. The value of "environment" is an environment variable and can be set via the Debug tab in the property pages or by changing the Properties/launchsettings file. For more information on using the environment variable see [the Microsoft docs page on this variable](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments).
+Notice the environment elements. When using the development environment, the local unminified files are used. For all other environments, it uses a CDN (content delivery network) link to a minified file. The value of "environment" is an environment variable and can be set via the Debug tab in the property pages or by changing the Properties/launchsettings file. For more information on using the environment variable see [the Microsoft docs page on this variable](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments).
 
 The asp-fallback-test attribute will check if a CSS class or JavaScript function for that specific file is available. If the test fails it will load the (local) script file that is defined in the asp-fallback-src attribute. For more information on the benefits of using the CDN and to dive deeper into the fallback attributes see the [Microsoft Docs page for the Link Tag Helper](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/link-tag-helper).
 
 The crossorigin attribute is always anonymous unless a cookie or user credentials are required to access the file from the remote location. For more information on this attribute see the [MDN docs page for the crossorigin attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes). 
 
-The integrity attribute is probably the most important to know about in regard to upgrading library versions. The value of this attribute is a cryptographic hash that matches the contents for the file referenced file. If the referenced file and the hash no longer match up, the browser will see the file as security compromise and block it. For more information on the integrity attribute see [the MDN docs page for the integrity attribute](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity). This page also has instructions and links for getting the appropriate hash for the files that you are trying to reference and embed in your website. 
+The integrity attribute is probably the most important to know about in regard to upgrading library versions. The value of this attribute is a cryptographic hash that matches the contents for the file referenced file. If the referenced file and the hash no longer match up, the browser will see the file as a security compromise and block it. For more information on the integrity attribute, see [the MDN docs page for the integrity attribute](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity). This page also has instructions and links for getting the appropriate hash for the files that you are trying to reference and embed on your website. 
 
 ### Managing 3rd party Client-Side libraries with LibMan
 
-We used to manage front-end libraries with NuGet or include files manually. These days Visual Studio has support for LibMan for managing client-side libraries from several sources in a .NET Core web project. LibMan already has a basic ["Getting started" guide on Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/client-side/libman/libman-vs) so I will not be repeating the information contained there in this post.
+We used to manage front-end libraries with NuGet or include files manually. These days Visual Studio has support for LibMan for managing client-side libraries from several sources in a .NET Core web project. LibMan already has a basic ["Getting started" guide on Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/client-side/libman/libman-vs) so I will not be repeating the information contained in this post.
 
-If you need packages from NPM that have multiple dependencies, then LibMan (unpkg/jsDelivr source) will not crawl those dependencies and include any  of them. My advice is to just use NPM in that case. Also try to stick to a single client-side package manager when possible for your project. This way the team won't get confused about how the libraries are managed. 
+If you need packages from NPM that have multiple dependencies, then LibMan (unpkg/jsDelivr source) will not crawl those dependencies and include any  of them. My advice is to just use NPM in that case. Also, try to stick to a single client-side package manager when possible for your project. This way the team won't get confused about how the libraries are managed. 
 
-LibMan is good at managing libraries without extra dependencies from cdnjs or other CDNs. If you use the "Add -> Client-Side library" option you get a visual editor however the "Manage Client-Side libraries" option will just open the libman.json file. This is something I found confusing at first. It turns out that the code completion in the JSON file provides the same experience as the visual editor. (It does however take a few minutes for the intellisense to fetch the results from the provider. So, if you're not seeing the list of libraries or files, just wait a minute.)
+LibMan is good at managing libraries without extra dependencies from cdnjs or other CDNs. If you use the "Add -> Client-Side library" option you get a visual editor however the "Manage Client-Side libraries" option will just open the libman.json file. This is something I found confusing at first. It turns out that the code completion in the JSON file provides the same experience as the visual editor. (It does, however, take a few minutes for the IntelliSense to fetch the results from the provider. So, if you're not seeing the list of libraries or files, just wait a minute.)
 
 A few screenshots comparing the visual editor vs the libman.json experience:
 
@@ -83,13 +83,13 @@ A few screenshots comparing the visual editor vs the libman.json experience:
 
 ![[Comparing file selection]]({{"/assets/images/20191019/ComparingFileSelection.png" | relative_url }})
 
-LibMan has out-of-the-box support for several sources but you can use the filesystem source if you need a file from another source. See the screenshot below for an example. The filesystem fallback only works with a complete url to a single file in the library input field. (It will not work with wildcards or a directory).
+LibMan has out-of-the-box support for several sources but you can use the filesystem source if you need a file from another source. See the screenshot below for an example. The filesystem fallback only works with a complete URL to a single file in the library input field. (It will not work with wildcards or a directory).
 
 ![[Visual editor filesystem search]]({{"/assets/images/20191019/FilesystemSearch.png" | relative_url }})
 
 ### How to bundle and minify your custom scripts 
 
-When you create new .NET Core web project in Visual Studio, an empty site.css and site.js with their minified counterparts will be added. When editing the unminified files, the minified files will not be updated with the changes made. You will need to configure an additional minification tool to enable the minification.
+When you create a new .NET Core web project in Visual Studio, an empty site.css and site.js with their minified counterparts will be added. When editing the unminified files, the minified files will not be updated with the changes made. You will need to configure an additional minification tool to enable the minification.
 
 I use the [BuildBundlerMinifier](https://github.com/madskristensen/BundlerMinifier) NuGet package to bundle and minify my own custom script and stylesheet files. To use it, first install the BuildBindlerMinifier package and add a  bundleconfig.json to the project containing the JSON contents as shown below to enable minification of the default files. Note that the input files parameter is an array, so you could provide multiple input files to bundle into one output file.
 

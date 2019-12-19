@@ -6,7 +6,7 @@ date:   2019-01-19 00:00:00 +0100
 tags: WebAPI
 ---
 
-When developing a Web API, using versioning can greatly improve flexibility for production deployments. Even if the contract for your API changes, current users will not be impacted if you keep supporting the version they currently use. Using versioning will allow the consumers of your service more time to upgrade to newer versions and it will at the same time allow you to deploy on demand. At some point in time certain versions should of course be deprecated and finally removed to improve maintainability of the software.  
+When developing a Web API, using versioning can greatly improve flexibility for production deployments. Even if the contract for your API changes, current users will not be impacted if you keep supporting the version they currently use. Using versioning will allow the consumers of your service more time to upgrade to newer versions and it will at the same time allow you to deploy on-demand. At some point in time, certain versions should, of course, be deprecated and finally removed to improve the maintainability of the software.  
 
 Microsoft has several NuGet packages available to easily configure versioning in your API: 
 
@@ -20,21 +20,21 @@ Microsoft.AspNet. WebApi.Versioning.ApiExplorer
 
 The ApiExplorer package is only needed when using the API metadata for each version (like for Swagger documentation). 
 
-In this blogpost I will describe how to enable versioning for your API including version support for the Swagger UI documentation. This blogpost will only describe these steps for a .NET Core projects. A complete solution with the code can be found in my [WebApiExamples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples " WebApiExamples GitHub repository "). A .NET Framework example can be found on the [Microsoft.Asp.NET.WebApi.Versioning github repository for a sample project](https://github.com/Microsoft/aspnet-api-versioning/tree/master/samples/webapi/SwaggerWebApiSample "Microsoft.Asp.NET.WebApi.Versioning github repository for a sample project"). The default Startup classes for the .NET Framework will need to be set up a little different from a project without versioning.  
+In this blog post, I will describe how to enable versioning for your API including version support for the Swagger UI documentation. This blogpost will only describe these steps for .NET Core projects. A complete solution with the code can be found in my [WebApiExamples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples " WebApiExamples GitHub repository "). A .NET Framework example can be found on the [Microsoft.Asp.NET.WebApi.Versioning GitHub repository for a sample project](https://github.com/Microsoft/aspnet-api-versioning/tree/master/samples/webapi/SwaggerWebApiSample "Microsoft.Asp.NET.WebApi.Versioning GitHub repository for a sample project"). The default Startup classes for the .NET Framework will need to be set up a little different from a project without versioning.  
 
-A small disclaimer: I will only show how to get started with versioning. When creating a new version, you should always think about support for previous versions or graceful degradation. Especially when you do database or schema changes. You must be careful not to break a previous version and may have to support multiple classes (or even database objects) with v1, v2 etcetera in their name or namespace if they are still used in a previous supported version. It is always a good idea when building an API to have integration tests. Having regression tests for the previous versions can ensure not breaking those versions while focusing on the new version.
+A small disclaimer: I will only show how to get started with versioning. When creating a new version, you should always think about support for previous versions or graceful degradation. Especially when you do database or schema changes. You must be careful not to break a previous version and may have to support multiple classes (or even database objects) with v1, v2 etcetera in their name or namespace if they are still used in a previously supported version. It is always a good idea when building an API to have integration tests. Having regression tests for the previous versions can ensure not breaking those versions while focusing on the new version.
 
-The [Microsoft.Asp.NET.WebApi.Versioning github repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.NET.WebApi.Versioning github repository wiki") contains all the documentation for the configuration and possibilities of the Microsoft.Asp.NET.WebApi.Versioning packages.
+The [Microsoft.Asp.NET.WebApi.Versioning GitHub repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.NET.WebApi.Versioning GitHub repository wiki") contains all the documentation for the configuration and possibilities of the Microsoft.Asp.NET.WebApi.Versioning packages.
 
 **Table of contents:**
 * Table of Contents
 {:toc}
 
-### Minimal configuration for versioning
+### The minimal configuration for versioning
 
-First install the NuGet package Microsoft.AspNetCore.Mvc.Versioning in your web project. 
+First, install the NuGet package Microsoft.AspNetCore.Mvc.Versioning in your web project. 
 
-Next go to the Startup.cs file and add the code shown below to enable the default versioning by querystring. 
+Next, go to the Startup.cs file and add the code shown below to enable the default versioning by the query string. 
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -50,15 +50,15 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-This is all you need to enable versioning. The 2 options set in this snippet ensure that your current API will act as version 1.0 and that everyone that calls your service without a version querystring receives that version. (If you use Swagger documentation via Swashbuckle you will need extra configuration to ensure Swagger file generation keeps working. See the "Setup versioning for Swagger documentation using the Swashbuckle NuGet package" section later in this post.) 
+This is all you need to enable versioning. The 2 options set in this snippet ensure that your current API will act as version 1.0 and that everyone that calls your service without a version query string receives that version. (If you use Swagger documentation via Swashbuckle you will need extra configuration to ensure Swagger file generation keeps working. See the "Setup versioning for Swagger documentation using the Swashbuckle NuGet package" section later in this post.) 
 
-In my [WebApiExamples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples " WebApiExamples GitHub repository ") I have an API endpoint on the route <span class="link-style">https://localhost:44314/api/routingapi/123</span>. After adding the versioning configuration, this API is still available and responding to that address. Next I can call <span class="link-style">https://localhost:44314/api/routingapi/123?api-version=2.0</span>. Since I did not define a version 2.0 (at this point), I will receive the automatic error generated from the versioning package as shown below. 
+In my [WebApiExamples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples " WebApiExamples GitHub repository "), I have an API endpoint on the route <span class="link-style">https://localhost:44314/api/routingapi/123</span>. After adding the versioning configuration, this API is still available and responding to that address. Next, I can call <span class="link-style">https://localhost:44314/api/routingapi/123?api-version=2.0</span>. Since I did not define a version 2.0 (at this point), I will receive the automatic error generated from the versioning package as shown below. 
 
 ```json
 {"error":{"code":"UnsupportedApiVersion","message":"The HTTP resource that matches the request URI 'https://localhost:44314/api/routingapi/123' does not support the API version '2.0'.","innerError":null}}
 ```
 
-I can now add a RouteApiV2Controller with a new interface to listen to the same url on V2. The code for the RouteApiController (that’s listening to version 1.0 or no ApiVersion specification) and RouteApiV2Controller are shown below.
+I can now add a RouteApiV2Controller with a new interface to listen to the same URL on V2. The code for the RouteApiController (that’s listening to version 1.0 or no ApiVersion specification) and RouteApiV2Controller are shown below.
 
  RouteApiController:
 
@@ -144,13 +144,13 @@ When calling the missing method in v2 <span class="link-style">https://localhost
 
 ### Setup versioning for Swagger documentation using the Swashbuckle NuGet package
 
-If you use Swagger UI via the Swashbuckle package as online documentation for your API you can set up descriptions per version. This will allow you to write release notes per versions and will give consumers documentation that represents actual the version the API that they currently use even if newer versions are available.
+If you use Swagger UI via the Swashbuckle package as online documentation for your API you can set up descriptions per version. This will allow you to write release notes per version and will give consumers documentation that represents the actual version of the API that they currently use even if newer versions are available.
 
 If you are using Swagger, the generation of the Swagger file will fail if routes are available for multiple versions and you have changed the configuration for Swagger to support multiple versions.
 
-First install the Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer NuGet package.
+First, install the Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer NuGet package.
 
-Next configure the Swagger configuration for versions in the ConfigureService method in the StartUp.cs as shown below to change the generation of a Swagger.json file per version.  
+Next, configure the Swagger configuration for versions in the ConfigureService method in the StartUp.cs as shown below to change the generation of a Swagger.json file per version.  
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -243,7 +243,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVers
 
 After this configuration the Swagger UI will have the different versions available in the dropdown to the left. Also notice that the version 2 will only contain the routes and models defined for version 2. 
 
-When versioning is enabled the api-version query parameter input field will be automatically added to all methods in Swagger UI.
+When versioning is enabled the API-version query parameter input field will be automatically added to all methods in Swagger UI.
 
 Swagger UI for version 1:
 
@@ -255,7 +255,7 @@ Swagger UI for version 2:
 
 If you use document or operation filters (as explained in [my previous post](https://samanthaneilen.github.io/2018/12/08/Using-and-extending-swagger.json-for-API-documentation.html "my blogpost regarding Swagger/OpenApi/Swashbuckle constraints")) you may get some unintended behavior when they are executed based on strings and names that overlap over versions.  
 
-For example look at the document filter below:
+For example, look at the document filter below:
 
 ```c#
 using Swashbuckle.AspNetCore.Swagger;
@@ -311,8 +311,8 @@ The Tag list contains a hardcoded name here that is not present when switching t
 
 ### Resources 
 
-For more information on all the features and configuration of the versioning packages visit the link below.
+For more information on all the features and configuration of the versioning packages, visit the link below.
 
- [Microsoft.Asp.NET.WebApi.Versioning github repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.NET.WebApi.Versioning github repository wiki") 
+ [Microsoft.Asp.NET.WebApi.Versioning GitHub repository wiki](https://github.com/Microsoft/aspnet-api-versioning/wiki "Microsoft.Asp.NET.WebApi.Versioning GitHub repository wiki") 
 
  
