@@ -3,7 +3,7 @@ layout: post
 title:  "Creating more maintainable javascript with self-executing functions"
 date:   2019-12-30 00:00:00 +0100
 
-tags: JavaScript Stylesheets
+tags: JavaScript
 ---
 I still mostly use regular JavaScript with jQuery in my applications. Before I started writing self-executing modules, my JavaScript was embedded all over the place in HTML and it was untestable (except for running a page in the browser). 
 
