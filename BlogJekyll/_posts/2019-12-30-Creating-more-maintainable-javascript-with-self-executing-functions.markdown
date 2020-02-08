@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Creating more maintainable javascript with self-executing functions"
+title:  "Creating more maintainable JavaScript with self-executing functions"
 date:   2019-12-30 00:00:00 +0100
 
 tags: JavaScript
