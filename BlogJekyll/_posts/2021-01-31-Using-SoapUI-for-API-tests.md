@@ -64,7 +64,7 @@ I have marked both options with a red square in the screenshot below:
 
 ![[save and import project]]({{"/assets/images/20210131/SaveAndImportProject.png" | relative_url }})<br/><br/>
 
-I have added my SoapUI project file to [my WebApi examples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples/blob/api_test_tools/Test%20files/NetCore%20WebApi%20Examples.postman_collection(no_parameters).json)  and you can try importing and running the collection on a localhost instance of that project.
+I have added my SoapUI project file to [my WebApi examples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples/tree/soapui-files/Test%20files)  and you can try importing and running the collection on a localhost instance of that project.
 
 ### Using custom properties 
 
@@ -88,7 +88,7 @@ The syntax ${#ParameterLevel#ParameterName} to assign or use a parameter value w
 
 Parameters and properties are also invaluable for TestSuites and TestCases. I will explain these features in a later paragraph.
 
-I have added my exported parameterized SoapUI file to [my WebApi examples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples/blob/api_test_tools/Test%20files/NetCore%20WebApi%20Examples.postman_collection(no_parameters).json) and you can try importing and running the project on a localhost instance of that project.
+I have added my exported parameterized SoapUI file to [my WebApi examples GitHub repository](https://github.com/SamanthaNeilen/WebApiExamples/tree/soapui-files/Test%20files) and you can try importing and running the project on a localhost instance of that project.
 
 ### SoapUI logging
 
